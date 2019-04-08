@@ -14,7 +14,7 @@ The Sample project uses the following coreDS concepts:
 * Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
 
 ## Getting started
-The first configuration is to configure coreDS Unreal to know which objects, object attributes, messages and message parameters your simulator will support. Keep in mind that the name you define are not related to the distributed simulation protocol you plan on using. These names will only be used internally when using BluePrint or the Mapping interface.
+The first step is to configure coreDS Unreal to know which objects, object attributes, messages and message parameters your simulator will support. Keep in mind that the name you define are not related to the distributed simulation protocol you plan on using. These names will only be used internally when using BluePrint or the Mapping interface.
 
 You can find that configuration from Edit->Project Settings->coreDS Unreal
 
@@ -23,6 +23,11 @@ In this particular case, the support sending/receiving a GUN object with Locatio
 The format for Object/Message names is NAME.PROPERTY. The Object/Message name is always the part before the first dot. 
 
 ![Plugin Configuration Screenshot](/Doc/Images/pluginconfig.png)
+
+Next step is to configure an actual connection with a Distributed Simulation protocol. coreDS supports HLA (High-Level Architecture and DIS (Distributed Interaction Simulation).
+
+You can open the configuration window either by running the game or by click on the coreDS toolbar button.
+![Plugin coreDSToolboxMenu Screenshot](/Doc/Images/coreDSToolboxMenu.png)
 
 This sample comes with 4 pre-configured settings:
 * DIS_Receiver: DIS v6
