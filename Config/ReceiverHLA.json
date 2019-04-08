@@ -24,9 +24,11 @@
       "EnableSynchronization" : false,
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
-      "FOMFileList" : [ "D:/Program Files/PitchActorsCore/FOM/RPRv2/RPR_v2.0.xml" ],
-      "FederateName" : "ReceiverHLA",
-      "FederateType" : "ReceiverHLA",
+      "FOMFileList" : [
+         "D:/code/ds.tools_git/coreUnrealFirstPersonShooterDemo/Config/RPR_v2.0.xml"
+      ],
+      "FederateName" : "Unreal_Receiver",
+      "FederateType" : "Unreal_Receiver",
       "FederationName" : "UnrealTest",
       "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
       "InteractionSubcribeList" : [ "HLAinteractionRoot.WeaponFire" ],
@@ -118,69 +120,6 @@
                   },
                   {
                      "Orientation.Phi" : "Orientation.Z"
-                  },
-                  {
-                     "Orientation.Psi" : "Orientation.X"
-                  },
-                  {
-                     "Orientation.Theta" : "Orientation.Y"
-                  },
-                  {
-                     "WorldLocation.X" : "Location.X"
-                  },
-                  {
-                     "WorldLocation.Y" : "Location.Y"
-                  },
-                  {
-                     "WorldLocation.Z" : "Location.Z"
-                  }
-               ]
-            }
-         ]
-      }
-   ],
-   "ObjectMappingOut" : [
-      {
-         "Person" : [
-            {
-               "Person" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
-            },
-            {
-               "Marking" : [
-                  {
-                     "MarkingData" : "'Person'"
-                  },
-                  {
-                     "MarkingEncodingType" : "ASCII"
-                  }
-               ]
-            },
-            {
-               "Person" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
-            },
-            {
-               "PrimaryWeaponState" : [
-                  {
-                     "PrimaryWeaponState" : "FiringPosition"
-                  }
-               ]
-            },
-            {
-               "Person" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
-            },
-            {
-               "Spatial" : [
-                  {
-                     "DeadReckoningAlgorithm" : "Static"
-                  },
-                  {
-                     "IsFrozen" : "False"
-                  },
-                  {
-                     "On Data Updated" : "convertLocationToHLA.lua"
-                  },
-                  {
-                     "Orientation.Phi" : "Location.Z"
                   },
                   {
                      "Orientation.Psi" : "Orientation.X"
