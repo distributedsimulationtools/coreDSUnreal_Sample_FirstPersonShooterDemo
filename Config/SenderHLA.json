@@ -30,11 +30,18 @@
       "FederateName" : "Unreal_Sender",
       "FederateType" : "Unreal_Sender",
       "FederationName" : "UnrealTest",
+      "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
       "LogicalTimeImplementationName" : "Double",
       "LookAhead" : "0.10",
       "MIMmodule" : "",
       "MaximumCallbackTime" : 0.10,
       "MinimumCallbackTime" : 0.0,
+      "ObjectPublishList" : [
+         {
+            "Attributes" : [ "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+         }
+      ],
       "RegisterSynchronizationPoint" : false,
       "RequestAttributeValuesUpdate" : true,
       "ResignAction" : "Delete Objects",
@@ -42,6 +49,36 @@
       "SynchronizationPointName" : "SyncPoint",
       "TimeStep" : "1.00"
    },
+   "MessageLinkSimLocalOut" : [
+      {
+         "ShotFired" : "HLAinteractionRoot.WeaponFire"
+      }
+   ],
+   "MessageMappingOut" : [
+      {
+         "ShotFired" : [
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "FiringLocation" : [
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLAForInteraction.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
    "Metadata" : {
       "FedInfoAppDom" : "",
       "FedInfoMOMVer" : "",
@@ -58,6 +95,51 @@
       "POCOrganisationName" : "",
       "POCPhoneNumber" : ""
    },
+   "ObjectLinkSimLocalOut" : [
+      {
+         "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+      }
+   ],
+   "ObjectMappingOut" : [
+      {
+         "Gun" : [
+            {
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "DeadReckoningAlgorithm" : "Static"
+                  },
+                  {
+                     "IsFrozen" : "False"
+                  },
+                  {
+                     "On Data Updated" : "convertUnrealPositionToDIS.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.Z"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.X"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.Y"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
    "RTIConfiguration" : {
       "Compiler" : "VC140",
       "DLLName" : "DLC_1516e_VC140_x64d.dll",

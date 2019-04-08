@@ -30,22 +30,15 @@
       "FederateName" : "Unreal_Receiver",
       "FederateType" : "Unreal_Receiver",
       "FederationName" : "UnrealTest",
-      "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
       "InteractionSubcribeList" : [ "HLAinteractionRoot.WeaponFire" ],
       "LogicalTimeImplementationName" : "Double",
       "LookAhead" : "0.10",
       "MIMmodule" : "",
       "MaximumCallbackTime" : 0.10,
       "MinimumCallbackTime" : 0.0,
-      "ObjectPublishList" : [
-         {
-            "Attributes" : [ "Marking", "PrimaryWeaponState", "Spatial" ],
-            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
-         }
-      ],
       "ObjectSubcribeList" : [
          {
-            "Attributes" : [ "Marking", "PrimaryWeaponState", "Spatial" ],
+            "Attributes" : [ "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
          }
       ],

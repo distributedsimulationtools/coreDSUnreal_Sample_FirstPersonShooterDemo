@@ -30,11 +30,32 @@
       "FederateName" : "",
       "FederateType" : "",
       "FederationName" : "",
+      "InteractionSubcribeList" : [ "DISinteraction.Fire" ],
       "LogicalTimeImplementationName" : "Double",
       "LookAhead" : "0.10",
       "MIMmodule" : "",
       "MaximumCallbackTime" : 0.10,
       "MinimumCallbackTime" : 0.0,
+      "ObjectSubcribeList" : [
+         {
+            "Attributes" : [
+               "AlternativeEntityType",
+               "Appearance",
+               "ArticulatedParameters",
+               "Capabilities",
+               "DeadReckoning",
+               "EntityID",
+               "EntityType",
+               "ForceID",
+               "LinearVelocity",
+               "LocationInWorldCoordinates",
+               "Marking",
+               "NumberOfArticulation",
+               "Orientation"
+            ],
+            "Object" : "DISobject.Entity State"
+         }
+      ],
       "RegisterSynchronizationPoint" : false,
       "RequestAttributeValuesUpdate" : true,
       "ResignAction" : "Delete Objects",
@@ -42,6 +63,36 @@
       "SynchronizationPointName" : "SyncPoint",
       "TimeStep" : "1.00"
    },
+   "MessageLinkSimLocalIn" : [
+      {
+         "DISinteraction.Fire" : [ "ShotFired" ]
+      }
+   ],
+   "MessageMappingIn" : [
+      {
+         "DISinteraction.Fire" : [
+            {
+               "DISinteraction.Fire" : "ShotFired"
+            },
+            {
+               "LocationInWorldCoordinates" : [
+                  {
+                     "On Data Received" : "convertPositionFromDIS.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
    "Metadata" : {
       "FedInfoAppDom" : "",
       "FedInfoMOMVer" : "",
@@ -58,6 +109,55 @@
       "POCOrganisationName" : "",
       "POCPhoneNumber" : ""
    },
+   "ObjectLinkSimLocalIn" : [
+      {
+         "DISobject.Entity State" : [ "Gun" ]
+      }
+   ],
+   "ObjectMappingIn" : [
+      {
+         "DISobject.Entity State" : [
+            {
+               "DISobject.Entity State" : "Gun"
+            },
+            {
+               "LocationInWorldCoordinates" : [
+                  {
+                     "On Data Received" : "convertPositionFromDIS.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            },
+            {
+               "DISobject.Entity State" : "Gun"
+            },
+            {
+               "Orientation" : [
+                  {
+                     "On Data Received" : "convertOrientationFromDIS.lua"
+                  },
+                  {
+                     "Phi" : "Orientation.Z"
+                  },
+                  {
+                     "Psi" : "Orientation.X"
+                  },
+                  {
+                     "Theta" : "Orientation.Y"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
    "RTIConfiguration" : {
       "Compiler" : "DLC",
       "DLLName" : "DLC_DIS-V6.dll",
