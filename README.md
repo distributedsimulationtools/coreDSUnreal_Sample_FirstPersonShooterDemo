@@ -54,9 +54,11 @@ Then you must map the local properties to the protocol properties. Since we are 
 
 ![Plugin DISMappingIn_WithChoice Screenshot](/Doc/Images/DISMappingIn_WithChoice.png)
 
-Finally, we are receiving coordinations in Geocentric format, which Unreal doesn't like. We could confirm the coordinates from within Unreal but by doing so, it will be harder to swith to a different Distributed Simulation Protocol. To keep all the configuration are runtime, we use the embededded Lua scripting engine to convert from Geocentric to flat coordinates centered around a given Lat/Long.
+Finally, we are receiving coordinations in Geocentric format, which Unreal doesn't like. We could convert the coordinates from within Unreal but by doing so, it will be harder to swith to a different Distributed Simulation Protocol. To keep all the configuration are runtime, we use the embededded Lua scripting engine to convert from Geocentric to flat coordinates centered around a given Lat/Long.
 
 ![Plugin DISMappingIn Screenshot](/Doc/Images/DISMappingIn.png)
+
+Below is the script that convert from Geocentric to local coordinates. Scripts are located in /Config/Scripts
 
 ```lua
 require("lla2ecef")  -- include functions to convert from Lat/Log to geocentric
@@ -81,19 +83,103 @@ function convertPositionFromDIS()  --same function name as the filename
 end
 ```
 
-
 #### DIS_Sender
 First, we must let coreDS knows that we want to send the EntityStatePDU and the FirePDU.
 
 ![Plugin DIS_Sender_PubSub Screenshot](/Doc/Images/DIS_Sender_PubSub.png)
 
+Then comes the Mapping configuration. Since we are in a Sender, we care about the "Mapping Out"
+
+The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the "+" list. You can then link the Local Object/Message to a Protocol Object/Message by using the dropbox next to the Object/Message name.
+
+Then you must map the local properties to the protocol properties. Since we are in a Sender mode, we must fill the complete structure. Static values can be set at this point. We will map Location and Orientation to local properties.
+
+Finally, we are sending coordinations in local format, which DIS doesn't like. We could convert the coordinates from within Unreal but by doing so, it will be harder to swith to a different Distributed Simulation Protocol. To keep all the configuration are runtime, we use the embededded Lua scripting engine to convert from flat coordinates, centered around a given Lat/Long, to Geocentric.
+
+![Plugin DISMappingOut Screenshot](/Doc/Images/DISMappingOut.png)
+
+As for outgoing values, you must set a conversion script to convert from the local coordinates to geocentric coordinates. Scripts are located in /Config/Scripts. 
+
 ### HLA
+For both configuration, it is important to have a valid FOM File. The sample provide a RPRFOM 2.0 compliant FOM file, located in /Config. Altought this sample is configurated to use a RPRFOM based FOM file, you can load the FOM file of your choice. 
 
 ![Plugin HLAConnectionConfiguration Screenshot](/Doc/Images/HLAConnectionConfiguration.png)
 
+coreDS supports a wide range of RTIs, from the legacy DMSO RTI (HLA 1.3) to HLA 1516e compliant RTI like the Pitch RTI or MAK RTI. The complete list of supported RTI can be found here https://www.ds.tools/products/coreds/detailed-features-list/
+
+If you are using the default configuration, you must select a HLA Evolved compliant RTI. 
+
+![Plugin HLAConnectionRTISettings Screenshot](/Doc/Images/HLAConnectionRTISettings.png)
+
 #### HLA_Received
+First, we must let coreDS knows that we want to receive the Statial attribute from a LifeForm and the WeaponFire interaction.
+
+![Plugin HLA_Receiver_PubSub Screenshot](/Doc/Images/HLA_Receiver_PubSub.png)
+
+Then comes the Mapping configuration. Since we are in a receiver, we care about the "Mapping In"
+
+The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the "+" list. You can then link the Local Object/Message to a Protocol Object/Message by using the dropbox next to the Object/Message name.
+
+Then you must map the local properties to the protocol properties. Since we are in a receiving mode, we only care about the values we are interested in. In our case, we want to send back to Unreal the Location and the Orientation from the Spatial attribute.
+
+Finally, we are receiving coordinations in Geocentric format, which Unreal doesn't like. We could convert the coordinates from within Unreal but by doing so, it will be harder to swith to a different Distributed Simulation Protocol. To keep all the configuration are runtime, we use the embededded Lua scripting engine to convert from Geocentric to flat coordinates centered around a given Lat/Long.
+
+![Plugin HLAMappingIn_ObjectMapping Screenshot](/Doc/Images/HLAMappingIn_ObjectMapping.png)
+
+Below is the script that convert from Geocentric to local coordinates. Scripts are located in /Config/Scripts
+
+
+```lua
+angleConversions = require("angleConversions")
+require("ecef2lla") -- include functions to convert from Lat/Log to geocentric
+require("lla2ecef") -- include functions to convert from geocentric to Lat/Log
+require("ReferenceLatLongAlt") --Include the center Lat/Long
+
+function convertPositionFromHLA()  --same function name as the filename
+
+--convert orientation
+    latTemp, lonTemp, discard = ecef2lla(DSimLocal.WorldLocation.X,DSimLocal.WorldLocation.Y,DSimLocal.WorldLocation.Z)
+
+    local lat = math.rad(latTemp)  --converting to rad because function requires rad
+    local lon = math.rad(lonTemp)
+
+    local psi =  DSimLocal.Orientation.Psi-- roll
+    local theta = DSimLocal.Orientation.Theta--pitch
+    local phi = DSimLocal.Orientation.Phi --yaw
+
+    DSimLocal.Orientation.Psi =  angleConversions.getOrientationFromEuler(lat, lon, psi, theta)
+    DSimLocal.Orientation.Theta = angleConversions.getPitchFromEuler(lat, lon, psi, theta)
+    DSimLocal.Orientation.Phi = angleConversions.getRollFromEuler(lat, lon, psi, theta, phi)
+
+--- convert position
+    -- Since we are working over a fairly small part of the planet, we can assume a flat surface
+    --convert lat/long to geocentric
+    tempx, tempy, tempz = lla2ecef(referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+
+    --Offset the coordinate to the local area
+    DSimLocal.WorldLocation.X = (DSimLocal.WorldLocation.X - tempx)
+    DSimLocal.WorldLocation.Y = (DSimLocal.WorldLocation.Y - tempy)
+    DSimLocal.WorldLocation.Z = (DSimLocal.WorldLocation.Z - tempz)
+end
+
+```
 
 #### HLA_Sender
+First, we must let coreDS knows that we want to send the Statial attribute from a LifeForm and the WeaponFire interaction.
+
+![Plugin DIS_Sender_PubSub Screenshot](/Doc/Images/DIS_Sender_PubSub.png)
+
+Then comes the Mapping configuration. Since we are in a Sender, we care about the "Mapping Out"
+
+The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the "+" list. You can then link the Local Object/Message to a Protocol Object/Message by using the dropbox next to the Object/Message name.
+
+Then you must map the local properties to the protocol properties. Since we are in a Sender mode, we must fill the complete structure. Static values can be set at this point. We will map Location and Orientation to local properties.
+
+Finally, we are sending coordinations in local format, which is not compliant witht the RPRFOM Spatial atttribute format. We could convert the coordinates from within Unreal but by doing so, it will be harder to swith to a different Distributed Simulation Protocol. To keep all the configuration are runtime, we use the embededded Lua scripting engine to convert from flat coordinates, centered around a given Lat/Long, to Geocentric.
+
+![Plugin HLAMappingOut Screenshot](/Doc/Images/HLAMappingOut.png)
+
+As for outgoing values, you must set a conversion script to convert from the local coordinates to geocentric coordinates. Scripts are located in /Config/Scripts.
 
 ## Connect
 At some point, you must instruct your simulator to connect to the Distributed Simulation system (either HLA or DIS). When using DIS, a UDP socket will be created.  When using HLA, a connection to the RTI will be attemped. If supported by the HLA version you are using, a call to connect() will be made, followed with a call to createFederationExecution (this call call be disabled from the HLA configuration) and joinFederationExecution. Once we have joined the Federation, we then set the various required state like time management, publish/subscribe,etc.
