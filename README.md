@@ -30,10 +30,10 @@ You can open the configuration window either by running the game or by click on 
 ![Plugin coreDSToolboxMenu Screenshot](/Doc/Images/coreDSToolboxMenu.png)
 
 This sample comes with 4 pre-configured settings:
-* DIS_Receiver: DIS v6
-* DIS_Sender: DIS v6
-* HLA_Received: HLA 1516e with RPRFOM 2.0
-* HLA_Sender: HLA 1516e with RPRFOM 2.0
+* DIS_Player1: DIS v6
+* DIS_Player2: DIS v6
+* HLA_Player1: HLA 1516e with RPRFOM 2.0
+* HLA_Player2: HLA 1516e with RPRFOM 2.0
 
 ![Plugin ConfigurationSelection Screenshot](/Doc/Images/ConfigurationSelection.png)
 
@@ -44,7 +44,7 @@ For both configurations, it is important to configure the Configured Network Ada
 
 ![Plugin DISConnectionConfiguration Screenshot](/Doc/Images/DISConnectionConfiguration.png)
 
-#### DIS_Receiver
+#### Receiving
 Even if DIS does not explicitly support Subscription, coreDS supports incoming filtering. First, we must let coreDS knows that we want to receive the EntityStatePDU and the FirePDU.
 
 ![Plugin DIS_Receiver_PubSub Screenshot](/Doc/Images/DIS_Receiver_PubSub.png)
@@ -88,8 +88,8 @@ function convertPositionFromDIS()  --same function name as the filename
 end
 ```
 
-#### DIS_Sender
-First, we must let coreDS knows that we want to send the EntityStatePDU and the FirePDU.
+#### Sending
+Then, we must let coreDS knows that we want to send the EntityStatePDU and the FirePDU.
 
 ![Plugin DIS_Sender_PubSub Screenshot](/Doc/Images/DIS_Sender_PubSub.png)
 
@@ -116,7 +116,7 @@ If you are using the default configuration, you must select a HLA Evolved compli
 
 ![Plugin HLAConnectionRTISettings Screenshot](/Doc/Images/HLAConnectionRTISettings.png)
 
-#### HLA_Received
+#### Sending
 First, we must let coreDS knows that we want to receive the Statial attribute from a LifeForm and the WeaponFire interaction.
 
 ![Plugin HLA_Receiver_PubSub Screenshot](/Doc/Images/HLA_Receiver_PubSub.png)
@@ -169,7 +169,7 @@ end
 
 ```
 
-#### HLA_Sender
+#### Receiving
 First, we must let coreDS knows that we want to send the Statial attribute from a LifeForm and the WeaponFire interaction.
 
 ![Plugin DIS_Sender_PubSub Screenshot](/Doc/Images/DIS_Sender_PubSub.png)
