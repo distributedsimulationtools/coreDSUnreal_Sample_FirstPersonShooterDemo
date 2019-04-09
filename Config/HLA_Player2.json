@@ -1,0 +1,228 @@
+{
+   "ConfigType" : 0,
+   "DISConfig" : {
+      "DISAppNumber" : 0,
+      "DISDestinationAddress" : "0.0.0.0",
+      "DISDisVer" : 5,
+      "DISExerciseID" : 1,
+      "DISJoinMulticastGroup" : false,
+      "DISMulticastAddress" : "0.0.0.0",
+      "DISNIA" : "127.0.0.1",
+      "DISPort" : 0,
+      "DISRcvBuffSize" : 2048,
+      "DISSiteNumber" : 1,
+      "DISUseAsyncIO" : false
+   },
+   "Federate" : {
+      "CallbackDeliveryMecanism" : "HLA_EVOKED",
+      "CreateFederationExecution" : true,
+      "DeleteFederationExecution" : true,
+      "DiscoverEverything" : false,
+      "DisplayReceivedCallbacks" : false,
+      "EnableAsynchronousDelivery" : false,
+      "EnableProvideAttributeValues" : false,
+      "EnableSynchronization" : false,
+      "EnableTimeConstrained" : false,
+      "EnableTimeRegulation" : false,
+      "FOMFileList" : [
+         "D:/code/ds.tools_git/coreUnrealFirstPersonShooterDemo/Config/RPR_v2.0.xml"
+      ],
+      "FederateName" : "Unreal_Player2",
+      "FederateType" : "Unreal_Player2",
+      "FederationName" : "UnrealTest",
+      "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
+      "InteractionSubcribeList" : [ "HLAinteractionRoot.WeaponFire" ],
+      "LogicalTimeImplementationName" : "Double",
+      "LookAhead" : "0.10",
+      "MIMmodule" : "",
+      "MaximumCallbackTime" : 0.10,
+      "MinimumCallbackTime" : 0.0,
+      "ObjectPublishList" : [
+         {
+            "Attributes" : [ "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+         }
+      ],
+      "ObjectSubcribeList" : [
+         {
+            "Attributes" : [ "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+         }
+      ],
+      "RegisterSynchronizationPoint" : false,
+      "RequestAttributeValuesUpdate" : true,
+      "ResignAction" : "Delete Objects",
+      "StartAtGALT" : false,
+      "SynchronizationPointName" : "SyncPoint",
+      "TimeStep" : "1.00"
+   },
+   "MessageLinkSimLocalIn" : [
+      {
+         "HLAinteractionRoot.WeaponFire" : [ "ShotFired" ]
+      }
+   ],
+   "MessageLinkSimLocalOut" : [
+      {
+         "ShotFired" : "HLAinteractionRoot.WeaponFire"
+      }
+   ],
+   "MessageMappingIn" : [
+      {
+         "HLAinteractionRoot.WeaponFire" : [
+            {
+               "HLAinteractionRoot.WeaponFire" : "ShotFired"
+            },
+            {
+               "FiringLocation" : [
+                  {
+                     "On Data Received" : "convertPositionFromHLAForInteraction.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "MessageMappingOut" : [
+      {
+         "ShotFired" : [
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "FiringLocation" : [
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLAForInteraction.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "Metadata" : {
+      "FedInfoAppDom" : "",
+      "FedInfoMOMVer" : "",
+      "FedInfoModDate" : "",
+      "FedInfoName" : "",
+      "FedInfoPurposes" : "",
+      "FedInfoSponsor" : "",
+      "FedInfoType" : "",
+      "FedInfoVersion" : "",
+      "POCEmail" : "",
+      "POCFirstName" : "",
+      "POCHonorName" : "",
+      "POCLastName" : "",
+      "POCOrganisationName" : "",
+      "POCPhoneNumber" : ""
+   },
+   "ObjectLinkSimLocalIn" : [
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : [ "Gun" ]
+      }
+   ],
+   "ObjectLinkSimLocalOut" : [
+      {
+         "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+      }
+   ],
+   "ObjectMappingIn" : [
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : [
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : "Gun"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "On Data Received" : "convertPositionFromHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.Z"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.X"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.Y"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "ObjectMappingOut" : [
+      {
+         "Gun" : [
+            {
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "DeadReckoningAlgorithm" : "Static"
+                  },
+                  {
+                     "IsFrozen" : "False"
+                  },
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.Z"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.X"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.Y"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "RTIConfiguration" : {
+      "Compiler" : "VC140",
+      "DLLName" : "DLC_1516e_VC140_x64.dll",
+      "LocalDesignatorsExtra" : "",
+      "Manufacturer" : "DLC",
+      "OverEncDecFOM" : "",
+      "RTILibPath" : "",
+      "Standard" : "1516e"
+   }
+}

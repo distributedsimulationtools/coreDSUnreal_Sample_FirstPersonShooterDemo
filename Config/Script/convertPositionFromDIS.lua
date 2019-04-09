@@ -17,8 +17,8 @@ lastPositionZ = DSimLocal.Z
 tempx, tempy, tempz = lla2ecef(referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 
-DSimLocal.X = (tempx - DSimLocal.X)
-DSimLocal.Y = (tempy - DSimLocal.Y)
-DSimLocal.Z = (tempz - DSimLocal.Z)
+DSimLocal.X = (DSimLocal.X - tempx)
+DSimLocal.Y = (DSimLocal.Y - tempy)
+DSimLocal.Z = (DSimLocal.Z - tempz)
 
 end
