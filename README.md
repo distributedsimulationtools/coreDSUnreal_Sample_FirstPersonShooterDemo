@@ -13,6 +13,9 @@ The Sample project uses the following coreDS concepts:
 * Receive Message (Receive a MunitionDetonationPDU or SendInteraction)
 * Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
 
+Runtime commands:
+* Pressing K will stop the connection then open the configuration selection window. This allows to change from one distributed simulation protocol to the other without having to close the application.
+
 ## Getting started
 The first step is to configure coreDS Unreal to know which objects, object attributes, messages and message parameters your simulator will support. Keep in mind that the name you define are not related to the distributed simulation protocol you plan on using. These names will only be used internally when using BluePrint or the Mapping interface.
 
