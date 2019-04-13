@@ -292,10 +292,13 @@
    },
    "ObjectLinkSimLocalIn" : [
       {
-         "DISobject.Entity State" : [ "Gun" ]
+         "DISobject.Entity State" : [ "Bullet", "Gun" ]
       }
    ],
    "ObjectLinkSimLocalOut" : [
+      {
+         "Bullet" : "DISobject.Entity State"
+      },
       {
          "Gun" : "DISobject.Entity State"
       }
@@ -303,6 +306,49 @@
    "ObjectMappingIn" : [
       {
          "DISobject.Entity State" : [
+            {
+               "DISobject.Entity State" : "Bullet"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "On Data Received" : "FilterBullet.lua"
+                  }
+               ]
+            },
+            {
+               "DISobject.Entity State" : "Bullet"
+            },
+            {
+               "LocationInWorldCoordinates" : [
+                  {
+                     "On Data Received" : "convertPositionFromDIS.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "DISobject.Entity State" : [
+            {
+               "DISobject.Entity State" : "Gun"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "On Data Received" : "FilterGun.lua"
+                  }
+               ]
+            },
             {
                "DISobject.Entity State" : "Gun"
             },
@@ -345,6 +391,230 @@
       }
    ],
    "ObjectMappingOut" : [
+      {
+         "Bullet" : [
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "AlternativeEntityType" : [
+                  {
+                     "Category" : "Ballistic"
+                  },
+                  {
+                     "CountryCode" : "Canada"
+                  },
+                  {
+                     "Domain" : "Other"
+                  },
+                  {
+                     "EntityKind" : "Munition"
+                  },
+                  {
+                     "Extra" : "0"
+                  },
+                  {
+                     "Specific" : "0"
+                  },
+                  {
+                     "Subcategory" : "Other"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "Appearance" : [
+                  {
+                     "GeneralAppearance.Value" : "0"
+                  },
+                  {
+                     "SpecificAppearance.Value" : "0"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "ArticulatedParameters" : [
+                  {
+                     "ArticulatedParameters" : "0"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "Capabilities" : [
+                  {
+                     "Capabilities" : "0"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "DeadReckoning" : [
+                  {
+                     "AngularVelocity.XAngularVelocity" : "0"
+                  },
+                  {
+                     "AngularVelocity.YAngularVelocity" : "0"
+                  },
+                  {
+                     "AngularVelocity.ZAngularVelocity" : "0"
+                  },
+                  {
+                     "DeadReckoningAlgorithm" : "DRM(F, P, B)"
+                  },
+                  {
+                     "LinearVelocity.XVelocity" : "0"
+                  },
+                  {
+                     "LinearVelocity.YVelocity" : "0"
+                  },
+                  {
+                     "LinearVelocity.ZVelocity" : "0"
+                  },
+                  {
+                     "OtherParameters" : "0"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "EntityID" : [
+                  {
+                     "EntityIdentify" : "Automatic Generated Object ID"
+                  },
+                  {
+                     "SimulationAddress.ApplicationID" : "Configured Application Number"
+                  },
+                  {
+                     "SimulationAddress.SiteID" : "Configured Site Number"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "Category" : "Fixed"
+                  },
+                  {
+                     "CountryCode" : "Canada"
+                  },
+                  {
+                     "Domain" : "Other"
+                  },
+                  {
+                     "EntityKind" : "Munition"
+                  },
+                  {
+                     "Extra" : "0"
+                  },
+                  {
+                     "Specific" : "0"
+                  },
+                  {
+                     "Subcategory" : "Other"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "ForceID" : [
+                  {
+                     "ForceID" : "Neutral"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "LinearVelocity" : [
+                  {
+                     "XVelocity" : "0"
+                  },
+                  {
+                     "YVelocity" : "0"
+                  },
+                  {
+                     "ZVelocity" : "0"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "LocationInWorldCoordinates" : [
+                  {
+                     "On Data Updated" : "convertUnrealPositionToDIS.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "Marking" : [
+                  {
+                     "MarkingData" : "'Bullet'"
+                  },
+                  {
+                     "MarkingEncodingType" : "ASCII"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "NumberOfArticulation" : [
+                  {
+                     "NumberOfArticulation" : "0"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "DISobject.Entity State"
+            },
+            {
+               "Orientation" : [
+                  {
+                     "Phi" : "0"
+                  },
+                  {
+                     "Psi" : "0"
+                  },
+                  {
+                     "Theta" : "0"
+                  }
+               ]
+            }
+         ]
+      },
       {
          "Gun" : [
             {
@@ -445,7 +715,7 @@
             {
                "EntityID" : [
                   {
-                     "EntityIdentify" : "2"
+                     "EntityIdentify" : "Automatic Generated Object ID"
                   },
                   {
                      "SimulationAddress.ApplicationID" : "Configured Application Number"

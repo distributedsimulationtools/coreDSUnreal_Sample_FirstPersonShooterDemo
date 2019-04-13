@@ -41,12 +41,20 @@
          {
             "Attributes" : [ "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+         },
+         {
+            "Attributes" : [ "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
          }
       ],
       "ObjectSubcribeList" : [
          {
             "Attributes" : [ "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+         },
+         {
+            "Attributes" : [ "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
          }
       ],
       "RegisterSynchronizationPoint" : false,
@@ -135,9 +143,15 @@
    "ObjectLinkSimLocalIn" : [
       {
          "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : [ "Gun" ]
+      },
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : [ "Bullet" ]
       }
    ],
    "ObjectLinkSimLocalOut" : [
+      {
+         "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+      },
       {
          "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
       }
@@ -174,9 +188,70 @@
                ]
             }
          ]
+      },
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : [
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : "Bullet"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "On Data Received" : "convertPositionFromHLA.lua"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
       }
    ],
    "ObjectMappingOut" : [
+      {
+         "Bullet" : [
+            {
+               "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "DeadReckoningAlgorithm" : "Static"
+                  },
+                  {
+                     "IsFrozen" : "False"
+                  },
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.Z"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.X"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.Y"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      },
       {
          "Gun" : [
             {

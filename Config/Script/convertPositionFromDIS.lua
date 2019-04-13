@@ -16,7 +16,6 @@ lastPositionZ = DSimLocal.Z
 --convert lat/long to geocentric
 tempx, tempy, tempz = lla2ecef(referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
-
 DSimLocal.X = (DSimLocal.X - tempx)
 DSimLocal.Y = (DSimLocal.Y - tempy)
 DSimLocal.Z = (DSimLocal.Z - tempz)
