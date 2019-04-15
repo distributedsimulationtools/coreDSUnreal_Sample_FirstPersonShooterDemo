@@ -21,7 +21,7 @@ The first step is to configure coreDS Unreal to know which objects, object attri
 
 You can find that configuration from Edit->Project Settings->coreDS Unreal
 
-In this particular case, the support sending/receiving a GUN object with Location and Orientation property. The demo also supports a GunFired message, with a Location property. 
+In this particular case, we support sending/receiving a GUN object with Location and Orientation property and a BULLET object with a location. The demo also supports a GunFired message, with a Location property. 
 
 The format for Object/Message names is NAME.PROPERTY. The Object/Message name is always the part before the first dot. 
 
@@ -89,6 +89,31 @@ function convertPositionFromDIS()  --same function name as the filename
     DSimLocal.Y = (tempy - DSimLocal.Y)
     DSimLocal.Z = (tempz - DSimLocal.Z)
 end
+```
+
+You might have noticed that nowhere during the configuration process with actually used the Entity Kind to distinguish between a GUN and a BULLET. coreDS supports complexe filtering by leveraging on the LUA scripting engine. In order to filter the GUNs, we've created a simple script, FilterGun.lua, which will check then EntityKind and instruct coreDS to discard the mapping if this is not the correct type.
+
+![Plugin DIS_MappingIn Filter Screenshot](/Doc/Images/DISMappingIn_Filter.png)
+
+```lua
+function FilterGun()
+    -- Available variables
+    -- DSimLocal.Category
+    -- DSimLocal.CountryCode
+    -- DSimLocal.Domain.Category
+    -- DSimLocal.Domain.CountryCode
+    -- DSimLocal.Domain.DomainDiscriminant
+    -- DSimLocal.EntityKind
+    -- DSimLocal.Extra
+    -- DSimLocal.On Data Received
+    -- DSimLocal.Specific
+    -- DSimLocal.Subcategory
+    
+  if((DSimLocal.EntityKind == "3") ~= true) then
+		DeleteValues = 1;
+	end
+end
+
 ```
 
 #### Sending
@@ -243,7 +268,20 @@ Then, each time a message of the register type is received, the DetonationReceiv
 
 ![Blueprint_ReceiveInteraction Screenshot](/Doc/Images/BluePrintReceiveInteraction.png)
 
-## Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
+## Delete Objects (deleteObjectInstance)
+If you are using DIS, at some point, you have to let coreDS know that a given object is no longer active; otherwise coreDS will continue to send the keep-alive packet. For HLA users, the concept is more straight forward since you have to actively delete the Object from the federation.
+
+![Blueprint_DeleteObject Screenshot](/Doc/Images/BluePrintDeleteObject.png)
+
+## Detect Deleted Objects (EntityStatePDU timeout or RemoveObjectInstance)
 At this point, you most likely understood how coreDS Unreal works! Let's add an handler when objects are removed from the Distributed Simulation system. When using DIS, this happen when the EntityStatePDU was not updated for the last 5 seconds (or the configuration value in DIS 7). With HLA, the handler is called when a removeObjectInstance callback is received.
 
 ![Blueprint_BlueprintRemoveObject Screenshot](/Doc/Images/BlueprintRemoveObject.png)
+
+#Blueprint locations
+Everything related to receiving objects and messages(interactions) are located in the Level Blueprint.
+
+Logic related to sending the GUN location is within the FirstPersonCaracter Blueprint.
+
+Logic related to sending the FIRE message and update the BULLET position is located in the FirstPersonProjectile Blueprint.
+
