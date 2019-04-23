@@ -285,3 +285,8 @@ Logic related to sending the GUN location is within the FirstPersonCaracter Blue
 
 Logic related to sending the FIRE message and update the BULLET position is located in the FirstPersonProjectile Blueprint.
 
+## Overwriting to ErrorMessage handler
+This block allows to overwrite the default behavior of displaying the errors in the upper left side of the screen. In some cases, you might want to handler errors in a different UI.
+
+![BluePrintRegisterErrorMessageHandler Screenshot](/Doc/Images/BluePrintRegisterErrorMessageHandler.png)
+
