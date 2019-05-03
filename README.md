@@ -291,7 +291,7 @@ This block allows to overwrite the default behavior of displaying the errors in 
 ![BluePrintRegisterErrorMessageHandler Screenshot](/Doc/Images/BluePrintRegisterErrorMessageHandler.PNG)
 
 ## Setting your origin
-The Unreal coordinate system, basically a rectangle, needs to be converted in order to be sent to DIS and HLA (RPR-FOM). In order to do that, coreDS Unreal provides an easy way mechanism.
+The Unreal coordinate system, basically a rectangle, needs to be converted in order to be sent to DIS and HLA (RPR-FOM). In order to do that, coreDS Unreal provides an easy mechanism.
 
 In order to set your project origin coordinates (lat/lon), go to "Project Settings", then "coreDS":
 
