@@ -9,11 +9,7 @@ lastPositionZ = 0
 function convertUnrealPositionToDIS()
 -- Since we are working over a fairly small part of the planet, we can assume a flat surface
 --convert lat/long to geocentric
-tempx, tempy, tempz = lla2ecef(referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
-
-DSimLocal.X = tempx + DSimLocal.X
-DSimLocal.Y = tempy + DSimLocal.Y
-DSimLocal.Z = tempz + DSimLocal.Z
+DSimLocal.X, DSimLocal.Y, DSimLocal.Z = EnuToEcef(DSimLocal.Y, DSimLocal.X, DSimLocal.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 lastPositionX = DSimLocal.X
 lastPositionY = DSimLocal.Y
