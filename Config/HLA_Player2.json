@@ -2,7 +2,7 @@
    "ConfigType" : 0,
    "DISConfig" : {
       "DISAppNumber" : 0,
-      "DISDestinationAddress" : "0.0.0.0",
+      "DISDestinationAddress" : "127.0.0.1",
       "DISDisVer" : 5,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
@@ -24,9 +24,7 @@
       "EnableSynchronization" : false,
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
-      "FOMFileList" : [
-         "D:/code/ds.tools_git/coreUnrealFirstPersonShooterDemo/Config/RPR_v2.0.xml"
-      ],
+      "FOMFileList" : [ "D:/code/ds.tools_git/FirstPerson_421/Config/RPR_v2.0.xml" ],
       "FederateName" : "Unreal_Player2",
       "FederateType" : "Unreal_Player2",
       "FederationName" : "UnrealTest",
@@ -58,7 +56,7 @@
          }
       ],
       "RegisterSynchronizationPoint" : false,
-      "RequestAttributeValuesUpdate" : true,
+      "RequestAttributeValuesUpdate" : false,
       "ResignAction" : "Delete Objects",
       "StartAtGALT" : false,
       "SynchronizationPointName" : "SyncPoint",
@@ -231,13 +229,13 @@
                      "On Data Updated" : "convertUnrealPositionToHLA.lua"
                   },
                   {
-                     "Orientation.Phi" : "Orientation.Z"
+                     "Orientation.Phi" : "0"
                   },
                   {
-                     "Orientation.Psi" : "Orientation.X"
+                     "Orientation.Psi" : "0"
                   },
                   {
-                     "Orientation.Theta" : "Orientation.Y"
+                     "Orientation.Theta" : "0"
                   },
                   {
                      "WorldLocation.X" : "Location.X"
@@ -292,12 +290,12 @@
       }
    ],
    "RTIConfiguration" : {
-      "Compiler" : "VC140",
-      "DLLName" : "DLC_1516e_VC140_x64.dll",
+      "Compiler" : "VC141",
+      "DLLName" : "Certi_1516e_VC141_x64.dll",
       "LocalDesignatorsExtra" : "",
-      "Manufacturer" : "DLC",
+      "Manufacturer" : "Certi",
       "OverEncDecFOM" : "",
-      "RTILibPath" : "",
+      "RTILibPath" : "D:/code/OpenSourceProjects/Certi/certi-master-head-build-vs2017-x64/installed/bin",
       "Standard" : "1516e"
    }
 }

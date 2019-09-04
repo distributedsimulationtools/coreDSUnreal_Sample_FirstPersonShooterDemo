@@ -1,5 +1,3 @@
-angleConversions = require("angleConversions")
-require("lla2ecef")
 require("ReferenceLatLongAlt")
 
 lastPositionX = 0

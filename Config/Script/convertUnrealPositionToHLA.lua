@@ -1,5 +1,4 @@
 angleConversions = require("angleConversions")
-require("lla2ecef")
 require("ecef2lla")
 require("ReferenceLatLongAlt")
 
@@ -7,11 +6,7 @@ function convertUnrealPositionToHLA ()
 
 -- Since we are working over a fairly small part of the planet, we can assume a flat surface
 --convert lat/long to geocentric
-tempx, tempy, tempz = lla2ecef(referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
- 
-DSimLocal.WorldLocation.X = tempx + DSimLocal.WorldLocation.X
-DSimLocal.WorldLocation.Y = tempy + DSimLocal.WorldLocation.Y
-DSimLocal.WorldLocation.Z = tempz + DSimLocal.WorldLocation.Z
+DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z = EnuToEcef(DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 lat, lon, alt = ecef2lla(DSimLocal.WorldLocation.X ,DSimLocal.WorldLocation.Y , DSimLocal.WorldLocation.Z)
 

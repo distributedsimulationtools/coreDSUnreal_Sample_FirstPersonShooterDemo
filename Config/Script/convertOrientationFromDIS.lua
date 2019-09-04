@@ -1,7 +1,6 @@
 angleConversions = require("angleConversions")
 require("ecef2lla")
 
-
 function convertOrientationFromDIS()
 --convert geocentric to lat/long
 lat, long, alt = ecef2lla(lastPositionX ,lastPositionY , lastPositionZ)
