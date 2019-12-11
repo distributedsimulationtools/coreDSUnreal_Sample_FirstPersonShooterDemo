@@ -1,20 +1,24 @@
 {
    "ConfigType" : 1,
    "DISConfig" : {
+      "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 3003,
       "DISDestinationAddress" : "192.168.1.255",
       "DISDisVer" : 6,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "192.168.1.217",
+      "DISNIA" : "192.168.1.218",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
-      "DISUseAsyncIO" : false
+      "DISUseAsyncIO" : false,
+      "EntityStatePDUUpdateFrequency" : 5,
+      "KeepAliveTimeout" : 5,
+      "SendCompleteEntityStatePDUPeriodically" : false,
+      "UseESUForKeepAlive" : false
    },
    "Federate" : {
-      "CallbackDeliveryMecanism" : "HLA_EVOKED",
       "CreateFederationExecution" : true,
       "DeleteFederationExecution" : true,
       "DiscoverEverything" : false,
@@ -25,11 +29,12 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "D:\\Program Files\\UE_4.20\\Engine\\Plugins\\coreDSModule\\Binaries\\Win64\\/DIS_V6_IEEE_1278.1a-1998.xml"
+         "D:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Plugins\\coreDSModule\\Binaries\\Win64\\/DIS_V6_IEEE_1278.1a-1998.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",
       "FederationName" : "",
+      "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
       "InteractionPublishList" : [ "DISinteraction.Fire" ],
       "InteractionSubcribeList" : [ "DISinteraction.Fire" ],
       "LogicalTimeImplementationName" : "Double",
@@ -243,6 +248,16 @@
                "ShotFired" : "DISinteraction.Fire"
             },
             {
+               "Range" : [
+                  {
+                     "Range" : "0"
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "DISinteraction.Fire"
+            },
+            {
                "TargetEntityID" : [
                   {
                      "EntityIdentify" : "0"
@@ -438,16 +453,6 @@
                "Bullet" : "DISobject.Entity State"
             },
             {
-               "ArticulatedParameters" : [
-                  {
-                     "ArticulatedParameters" : "0"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
                "Capabilities" : [
                   {
                      "Capabilities" : "0"
@@ -472,13 +477,13 @@
                      "DeadReckoningAlgorithm" : "DRM(F, P, B)"
                   },
                   {
-                     "LinearVelocity.XVelocity" : "0"
+                     "LinearVelocity.LinearAccelerationX" : "0"
                   },
                   {
-                     "LinearVelocity.YVelocity" : "0"
+                     "LinearVelocity.LinearAccelerationY" : "0"
                   },
                   {
-                     "LinearVelocity.ZVelocity" : "0"
+                     "LinearVelocity.LinearAccelerationZ" : "0"
                   },
                   {
                      "OtherParameters" : "0"
@@ -662,16 +667,6 @@
                "Gun" : "DISobject.Entity State"
             },
             {
-               "ArticulatedParameters" : [
-                  {
-                     "ArticulatedParameters" : "0"
-                  }
-               ]
-            },
-            {
-               "Gun" : "DISobject.Entity State"
-            },
-            {
                "Capabilities" : [
                   {
                      "Capabilities" : "0"
@@ -696,13 +691,13 @@
                      "DeadReckoningAlgorithm" : "Static (Entity does not move.)"
                   },
                   {
-                     "LinearVelocity.XVelocity" : "0"
+                     "LinearVelocity.LinearAccelerationX" : "0"
                   },
                   {
-                     "LinearVelocity.YVelocity" : "0"
+                     "LinearVelocity.LinearAccelerationY" : "0"
                   },
                   {
-                     "LinearVelocity.ZVelocity" : "0"
+                     "LinearVelocity.LinearAccelerationZ" : "0"
                   },
                   {
                      "OtherParameters" : "0"
