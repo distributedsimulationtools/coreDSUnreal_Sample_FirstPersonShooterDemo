@@ -1,9 +1,11 @@
 {
    "ConfigType" : 0,
    "DISConfig" : {
+      "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 0,
       "DISDestinationAddress" : "127.0.0.1",
       "DISDisVer" : 5,
+      "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
@@ -11,10 +13,13 @@
       "DISPort" : 0,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
-      "DISUseAsyncIO" : false
+      "DISUseAsyncIO" : false,
+      "EntityStatePDUUpdateFrequency" : 5,
+      "KeepAliveTimeout" : 5,
+      "SendCompleteEntityStatePDUPeriodically" : false,
+      "UseESUForKeepAlive" : false
    },
    "Federate" : {
-      "CallbackDeliveryMecanism" : "HLA_EVOKED",
       "CreateFederationExecution" : true,
       "DeleteFederationExecution" : true,
       "DiscoverEverything" : false,
@@ -24,10 +29,13 @@
       "EnableSynchronization" : false,
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
-      "FOMFileList" : [ "D:/code/ds.tools_git/FirstPerson_421/Config/RPR_v2.0.xml" ],
+      "FOMFileList" : [
+         "D:/code/ds.tools_git/coreUnrealFirstPersonShooterDemo/Config/RPR_v2.0.xml"
+      ],
       "FederateName" : "Unreal_Player2",
       "FederateType" : "Unreal_Player2",
-      "FederationName" : "UnrealTest",
+      "FederationName" : "Unreal",
+      "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
       "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
       "InteractionSubcribeList" : [ "HLAinteractionRoot.WeaponFire" ],
       "LogicalTimeImplementationName" : "Double",
@@ -37,21 +45,21 @@
       "MinimumCallbackTime" : 0.0,
       "ObjectPublishList" : [
          {
-            "Attributes" : [ "Spatial" ],
+            "Attributes" : [ "EntityType", "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
          },
          {
-            "Attributes" : [ "Spatial" ],
+            "Attributes" : [ "EntityType", "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
          }
       ],
       "ObjectSubcribeList" : [
          {
-            "Attributes" : [ "Spatial" ],
+            "Attributes" : [ "EntityType", "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
          },
          {
-            "Attributes" : [ "Spatial" ],
+            "Attributes" : [ "EntityType", "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
          }
       ],
@@ -218,6 +226,34 @@
                "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
             },
             {
+               "EntityType" : [
+                  {
+                     "Category" : "1"
+                  },
+                  {
+                     "CountryCode" : "1"
+                  },
+                  {
+                     "Domain" : "1"
+                  },
+                  {
+                     "EntityKind" : "2"
+                  },
+                  {
+                     "Extra" : "1"
+                  },
+                  {
+                     "Specific" : "1"
+                  },
+                  {
+                     "Subcategory" : "1"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+            },
+            {
                "Spatial" : [
                   {
                      "DeadReckoningAlgorithm" : "Static"
@@ -252,6 +288,34 @@
       },
       {
          "Gun" : [
+            {
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "Category" : "1"
+                  },
+                  {
+                     "CountryCode" : "3"
+                  },
+                  {
+                     "Domain" : "2"
+                  },
+                  {
+                     "EntityKind" : "3"
+                  },
+                  {
+                     "Extra" : "0"
+                  },
+                  {
+                     "Specific" : "0"
+                  },
+                  {
+                     "Subcategory" : "1"
+                  }
+               ]
+            },
             {
                "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
             },
@@ -291,11 +355,11 @@
    ],
    "RTIConfiguration" : {
       "Compiler" : "VC141",
-      "DLLName" : "Certi_1516e_VC141_x64.dll",
+      "DLLName" : "DLC_1516e_VC141_x64.dll",
       "LocalDesignatorsExtra" : "",
-      "Manufacturer" : "Certi",
+      "Manufacturer" : "DLC",
       "OverEncDecFOM" : "",
-      "RTILibPath" : "D:/code/OpenSourceProjects/Certi/certi-master-head-build-vs2017-x64/installed/bin",
+      "RTILibPath" : "",
       "Standard" : "1516e"
    }
 }
