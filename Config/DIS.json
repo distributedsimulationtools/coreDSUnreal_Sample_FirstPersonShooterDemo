@@ -5,16 +5,17 @@
       "DISAppNumber" : 3002,
       "DISDestinationAddress" : "192.168.1.255",
       "DISDisVer" : 6,
+      "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "192.168.1.218",
+      "DISNIA" : "192.168.1.76",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
       "DISUseAsyncIO" : false,
       "EntityStatePDUUpdateFrequency" : 5,
-      "KeepAliveTimeout" : 5,
+      "KeepAliveTimeout" : 10,
       "SendCompleteEntityStatePDUPeriodically" : false,
       "UseESUForKeepAlive" : false
    },
@@ -29,7 +30,7 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "D:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Plugins\\coreDSModule\\Binaries\\Win64\\/DIS_V6_IEEE_1278.1a-1998.xml"
+         "DIS_V6_IEEE_1278.1a-1998.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",
@@ -307,7 +308,7 @@
    },
    "ObjectLinkSimLocalIn" : [
       {
-         "DISobject.Entity State" : [ "Bullet", "Gun" ]
+         "DISobject.Entity State" : [ "Bullet", "EverythingElse", "Gun" ]
       }
    ],
    "ObjectLinkSimLocalOut" : [
@@ -347,6 +348,58 @@
                   },
                   {
                      "Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "DISobject.Entity State" : [
+            {
+               "DISobject.Entity State" : "EverythingElse"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "On Data Received" : "FilterAllExceptBulletAndGun.lua"
+                  }
+               ]
+            },
+            {
+               "DISobject.Entity State" : "EverythingElse"
+            },
+            {
+               "LocationInWorldCoordinates" : [
+                  {
+                     "On Data Received" : "convertPositionFromDIS.lua"
+                  },
+                  {
+                     "X" : "Location.X"
+                  },
+                  {
+                     "Y" : "Location.Y"
+                  },
+                  {
+                     "Z" : "Location.Z"
+                  }
+               ]
+            },
+            {
+               "DISobject.Entity State" : "EverythingElse"
+            },
+            {
+               "Orientation" : [
+                  {
+                     "On Data Received" : "convertOrientationFromDIS.lua"
+                  },
+                  {
+                     "Phi" : "Orientation.Z"
+                  },
+                  {
+                     "Psi" : "Orientation.X"
+                  },
+                  {
+                     "Theta" : "Orientation.Y"
                   }
                ]
             }

@@ -14,4 +14,9 @@ lastPositionZ = DSimLocal.Z
 --convert lat/long to geocentric
 DSimLocal.Y, DSimLocal.X, DSimLocal.Z = EcefToEnu(DSimLocal.X, DSimLocal.Y, DSimLocal.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
+--scale back from meter to cm
+DSimLocal.X = DSimLocal.X * 100;
+DSimLocal.Y = DSimLocal.Y * 100;
+DSimLocal.Z = DSimLocal.Z * 100;
+
 end
