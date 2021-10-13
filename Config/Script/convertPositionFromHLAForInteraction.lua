@@ -6,8 +6,8 @@ function convertPositionFromHLAForInteraction()
 DSimLocal.X, DSimLocal.Y,  DSimLocal.Z = EcefToEnu(DSimLocal.X, DSimLocal.Y, DSimLocal.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 --scale back from meter to cm
-DSimLocal.WorldLocation.X = DSimLocal.WorldLocation.X * 100;
-DSimLocal.WorldLocation.Y = DSimLocal.WorldLocation.Y * 100;
-DSimLocal.WorldLocation.Z = DSimLocal.WorldLocation.Z * 100;
+DSimLocal.X = DSimLocal.X * 100;
+DSimLocal.Y = DSimLocal.Y * 100;
+DSimLocal.Z = DSimLocal.Z * 100;
 
 end

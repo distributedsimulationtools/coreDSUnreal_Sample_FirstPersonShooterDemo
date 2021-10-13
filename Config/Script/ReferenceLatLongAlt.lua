@@ -1,3 +1,3 @@
-referenceOffset_Lat = 21.2941
-referenceOffset_Long = -157.861
-referenceOffset_Alt= -2
+referenceOffset_Lat = 46.8299
+referenceOffset_Long = -71.254
+referenceOffset_Alt= 5

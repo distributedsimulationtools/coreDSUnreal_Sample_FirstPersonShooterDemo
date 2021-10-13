@@ -36,6 +36,8 @@
       "FederateType" : "Unreal_Player1",
       "FederationName" : "MAK-RPR-2.0",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
+      "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
+      "InteractionSubcribeList" : [ "HLAinteractionRoot.WeaponFire" ],
       "LogicalTimeImplementationName" : "Double",
       "LookAhead" : "0.10",
       "MIMmodule" : "",
