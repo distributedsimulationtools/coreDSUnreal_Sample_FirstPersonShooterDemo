@@ -144,7 +144,7 @@ If you are using the default configuration, you must select a HLA Evolved compli
 
 ![Plugin HLAConnectionRTISettings Screenshot](/Doc/Images/HLAConnectionRTISettings.png)
 
-#### Sending
+#### Receiving
 First, we must let coreDS knows that we want to receive the Statial attribute from a LifeForm and the WeaponFire interaction.
 
 ![Plugin HLA_Receiver_PubSub Screenshot](/Doc/Images/HLA_Receiver_PubSub.png)
@@ -197,7 +197,7 @@ end
 
 ```
 
-#### Receiving
+#### Sending
 First, we must let coreDS knows that we want to send the Statial attribute from a LifeForm and the WeaponFire interaction.
 
 ![Plugin DIS_Sender_PubSub Screenshot](/Doc/Images/DIS_Sender_PubSub.png)
