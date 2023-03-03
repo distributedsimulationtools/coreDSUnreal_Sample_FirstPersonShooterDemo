@@ -2,15 +2,15 @@
    "ConfigType" : 0,
    "DISConfig" : {
       "AutomaticEntityStateUpdateManagement" : true,
-      "DISAppNumber" : 0,
-      "DISDestinationAddress" : "127.0.0.1",
+      "DISAppNumber" : 3001,
+      "DISDestinationAddress" : "0.0.0.255",
       "DISDisVer" : 5,
       "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
-      "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "127.0.0.1",
-      "DISPort" : 0,
+      "DISMulticastAddress" : "224.0.0.1",
+      "DISNIA" : "0.0.0.0",
+      "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
       "DISUseAsyncIO" : false,
@@ -20,26 +20,71 @@
       "UseESUForKeepAlive" : false
    },
    "Federate" : {
+      "CallbackReportingLevel" : 1,
+      "CallbacksToLog" : false,
       "CreateFederationExecution" : true,
       "DeleteFederationExecution" : true,
       "DiscoverEverything" : false,
-      "DisplayReceivedCallbacks" : false,
       "EnableAsynchronousDelivery" : false,
       "EnableProvideAttributeValues" : false,
       "EnableSynchronization" : false,
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "RPR_v2.0.xml"
+         "C:\\code\\ds.tools_git\\Github Public Samples\\coreUnrealFirstPersonShooterDemo_UE500+\\Config\\RPR_v2.0.xml"
       ],
       "FederateName" : "Unreal_Player1",
       "FederateType" : "Unreal_Player1",
       "FederationName" : "Unreal",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
-      "InteractionPublishList" : [ "HLAinteractionRoot.WeaponFire" ],
-      "InteractionSubcribeList" : [ "HLAinteractionRoot.WeaponFire" ],
+      "InteractionPublishList" : [
+         {
+            "Attributes" : [
+               "EventIdentifier",
+               "FireControlSolutionRange",
+               "FireMissionIndex",
+               "FiringLocation",
+               "FiringObjectIdentifier",
+               "FuseType",
+               "InitialVelocityVector",
+               "MunitionObjectIdentifier",
+               "MunitionType",
+               "QuantityFired",
+               "RateOfFire",
+               "TargetObjectIdentifier",
+               "WarheadType"
+            ],
+            "Message" : "HLAinteractionRoot.WeaponFire"
+         }
+      ],
+      "InteractionSubcribeList" : [
+         {
+            "Attributes" : [
+               "EventIdentifier",
+               "FireControlSolutionRange",
+               "FireMissionIndex",
+               "FiringLocation",
+               "FiringObjectIdentifier",
+               "FuseType",
+               "InitialVelocityVector",
+               "MunitionObjectIdentifier",
+               "MunitionType",
+               "QuantityFired",
+               "RateOfFire",
+               "TargetObjectIdentifier",
+               "WarheadType"
+            ],
+            "Message" : "HLAinteractionRoot.WeaponFire"
+         }
+      ],
+      "LogToFile" : {
+         "Destination" : "",
+         "Enabled" : 0,
+         "Filter" : "%Severity% >= error",
+         "MaxVerbose" : "%Severity% >= error"
+      },
       "LogicalTimeImplementationName" : "Double",
-      "LookAhead" : "0.10",
+      "LookAhead" : 0.10,
       "MIMmodule" : "",
       "MaximumCallbackTime" : 0.10,
       "MinimumCallbackTime" : 0.0,
@@ -67,12 +112,13 @@
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
          }
       ],
+      "OptionalFOMFileList" : null,
       "RegisterSynchronizationPoint" : false,
       "RequestAttributeValuesUpdate" : true,
       "ResignAction" : "Delete Objects",
       "StartAtGALT" : false,
       "SynchronizationPointName" : "SyncPoint",
-      "TimeStep" : "1.00"
+      "TimeStep" : 1.0
    },
    "MessageLinkSimLocalIn" : [
       {
@@ -93,7 +139,7 @@
             {
                "FiringLocation" : [
                   {
-                     "On Data Received" : "convertPositionFromHLAForInteraction.lua"
+                     "On Data Received" : "convertPositionFromHLAToUnrealForInteraction.lua"
                   },
                   {
                      "X" : "Location.X"
@@ -116,6 +162,39 @@
                "ShotFired" : "HLAinteractionRoot.WeaponFire"
             },
             {
+               "EventIdentifier" : [
+                  {
+                     "EventCount" : 0
+                  },
+                  {
+                     "IssuingObjectIdentifier" : "0"
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "FireControlSolutionRange" : [
+                  {
+                     "FireControlSolutionRange" : 0.0
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "FireMissionIndex" : [
+                  {
+                     "FireMissionIndex" : 0
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
                "FiringLocation" : [
                   {
                      "On Data Updated" : "convertUnrealPositionToHLAForInteraction.lua"
@@ -128,6 +207,110 @@
                   },
                   {
                      "Z" : "Location.Z"
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "FiringObjectIdentifier" : [
+                  {
+                     "FiringObjectIdentifier" : "0"
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "InitialVelocityVector" : [
+                  {
+                     "XVelocity" : 0.0
+                  },
+                  {
+                     "YVelocity" : 0.0
+                  },
+                  {
+                     "ZVelocity" : 0.0
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "MunitionObjectIdentifier" : [
+                  {
+                     "MunitionObjectIdentifier" : "0"
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "MunitionType" : [
+                  {
+                     "Category" : 0
+                  },
+                  {
+                     "CountryCode" : 0
+                  },
+                  {
+                     "Domain" : 1
+                  },
+                  {
+                     "EntityKind" : 3
+                  },
+                  {
+                     "Extra" : 0
+                  },
+                  {
+                     "Specific" : 0
+                  },
+                  {
+                     "Subcategory" : 0
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "QuantityFired" : [
+                  {
+                     "QuantityFired" : 1
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "RateOfFire" : [
+                  {
+                     "RateOfFire" : 1
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "TargetObjectIdentifier" : [
+                  {
+                     "TargetObjectIdentifier" : "0"
+                  }
+               ]
+            },
+            {
+               "ShotFired" : "HLAinteractionRoot.WeaponFire"
+            },
+            {
+               "WarheadType" : [
+                  {
+                     "WarheadType" : 8310
                   }
                ]
             }
@@ -178,7 +361,7 @@
             {
                "Spatial" : [
                   {
-                     "On Data Received" : "convertPositionFromHLA.lua"
+                     "On Data Received" : "convertPositionFromHLAToUnreal.lua"
                   },
                   {
                      "Orientation.Phi" : "Orientation.Z"
@@ -210,7 +393,7 @@
             {
                "Spatial" : [
                   {
-                     "On Data Received" : "convertPositionFromHLA.lua"
+                     "On Data Received" : "convertPositionFromHLAToUnreal.lua"
                   },
                   {
                      "Orientation.Phi" : "Orientation.Z"
@@ -242,7 +425,7 @@
             {
                "Spatial" : [
                   {
-                     "On Data Received" : "convertPositionFromHLA.lua"
+                     "On Data Received" : "convertPositionFromHLAToUnreal.lua"
                   },
                   {
                      "WorldLocation.X" : "Location.X"
@@ -295,7 +478,7 @@
             {
                "Spatial" : [
                   {
-                     "DeadReckoningAlgorithm" : "Static"
+                     "DeadReckoningAlgorithm" : 1
                   },
                   {
                      "IsFrozen" : "False"
@@ -371,7 +554,7 @@
             {
                "Marking" : [
                   {
-                     "MarkingData" : "'UnrealP1'"
+                     "MarkingData" : "UnrealP1"
                   },
                   {
                      "MarkingEncodingType" : "ASCII"
@@ -384,7 +567,7 @@
             {
                "Spatial" : [
                   {
-                     "DeadReckoningAlgorithm" : "DRM_FPW"
+                     "DeadReckoningAlgorithm" : 1
                   },
                   {
                      "IsFrozen" : "False"
@@ -400,15 +583,6 @@
                   },
                   {
                      "Orientation.Theta" : "Orientation.Y"
-                  },
-                  {
-                     "VelocityVector.XVelocity" : "0"
-                  },
-                  {
-                     "VelocityVector.YVelocity" : "0"
-                  },
-                  {
-                     "VelocityVector.ZVelocity" : "0"
                   },
                   {
                      "WorldLocation.X" : "Location.X"
@@ -431,6 +605,8 @@
       "Manufacturer" : "DLC",
       "OverEncDecFOM" : "",
       "RTILibPath" : "C:/MAK/makRti4.6/bin",
-      "Standard" : "1516e"
-   }
+      "Standard" : "1516e",
+      "SystemVariables" : null
+   },
+   "Version" : "3.0.217.Last_V1.5-187-gc0dd096e-dev"
 }

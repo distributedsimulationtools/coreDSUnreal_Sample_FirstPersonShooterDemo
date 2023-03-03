@@ -1,13 +1,14 @@
 require("ReferenceLatLongAlt")
 
-function convertUnrealPositionToHLAForInteraction ()
+function convertUnrealPositionToHLAForInteraction (value)
 
--- Since we are working over a fairly small part of the planet, we can assume a flat surface
---convert lat/long to geocentric
-DSimLocal.X, DSimLocal.Y, DSimLocal.Z = EnuToEcef(DSimLocal.X, DSimLocal.Y, DSimLocal.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+	-- Since we are working over a fairly small part of the planet, we can assume a flat surface
+	--convert lat/long to geocentric
+	tempX, tempY, tempZ = EnuToEcef(value['X']:toDouble(), value['Y']:toDouble(), value['Z']:toDouble(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
---scale back from meter to cm
-DSimLocal.X = DSimLocal.X * 100;
-DSimLocal.Y = DSimLocal.Y * 100;
-DSimLocal.Z = DSimLocal.Z * 100;
+	--scale back from meter to cm
+	value['X']:set(tempX * 100);
+	value['Y']:set(tempY * 100);
+	value['Z']:set(tempZ * 100);
+	
 end

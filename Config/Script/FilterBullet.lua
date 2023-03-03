@@ -1,17 +1,15 @@
-function FilterBullet()
-    -- Available variables
-    -- DSimLocal.Category
-    -- DSimLocal.CountryCode
-    -- DSimLocal.Domain.Category
-    -- DSimLocal.Domain.CountryCode
-    -- DSimLocal.Domain.DomainDiscriminant
-    -- DSimLocal.EntityKind
-    -- DSimLocal.Extra
-    -- DSimLocal.On Data Received
-    -- DSimLocal.Specific
-    -- DSimLocal.Subcategory
-    
-  if((DSimLocal.EntityKind == "2") ~= true) then
-		DeleteValues = 1;
+require("__concatenateEntityType")
+
+function startswith(text, prefix)
+    return text:find(prefix, 1, true) == 1
+end
+
+function FilterBullet (value)
+	-- if Platform of type Munition
+	
+	entitykind = __concatenateEntityType(value)
+	
+	if(startswith(entitykind, "2.1.") ~= true) then
+		return true
 	end
 end
