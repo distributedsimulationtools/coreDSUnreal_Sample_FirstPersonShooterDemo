@@ -90,6 +90,10 @@
       "MinimumCallbackTime" : 0.0,
       "ObjectPublishList" : [
          {
+            "Attributes" : [ "ArticulatedParametersArray" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity"
+         },
+         {
             "Attributes" : [ "EntityType", "ForceIdentifier", "Marking", "Spatial" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
          },
@@ -100,7 +104,7 @@
       ],
       "ObjectSubcribeList" : [
          {
-            "Attributes" : [ "Spatial" ],
+            "Attributes" : [ "Spatial", "ArticulatedParametersArray" ],
             "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity"
          },
          {
@@ -359,6 +363,16 @@
                "HLAobjectRoot.BaseEntity.PhysicalEntity" : "EverythingElse"
             },
             {
+               "ArticulatedParametersArray" : [
+                  {
+                     "ArticulatedParametersArray" : "Parts"
+                  }
+               ]
+            },
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity" : "EverythingElse"
+            },
+            {
                "Spatial" : [
                   {
                      "On Data Received" : "convertPositionFromHLAToUnreal.lua"
@@ -608,5 +622,5 @@
       "Standard" : "1516e",
       "SystemVariables" : null
    },
-   "Version" : "3.0.217.Last_V1.5-187-gc0dd096e-dev"
+   "Version" : "3.0.221.Last_V1.5-191-g8c4bceee-dev"
 }

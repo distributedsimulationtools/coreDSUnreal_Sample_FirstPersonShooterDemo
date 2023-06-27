@@ -3,13 +3,13 @@
    "DISConfig" : {
       "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 3001,
-      "DISDestinationAddress" : "10.0.0.255",
+      "DISDestinationAddress" : "127.0.0.1",
       "DISDisVer" : 5,
       "DISEnableExpertMode" : true,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "10.0.0.70",
+      "DISNIA" : "127.0.0.1",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
@@ -314,6 +314,16 @@
                      "Theta" : "Orientation.Y"
                   }
                ]
+            },
+            {
+               "DISobject.Entity State" : "EverythingElse"
+            },
+            {
+               "VariableParameters" : [
+                  {
+                     "VariableParameters" : "Parts"
+                  }
+               ]
             }
          ]
       },
@@ -368,6 +378,16 @@
                   },
                   {
                      "Theta" : "Orientation.Y"
+                  }
+               ]
+            },
+            {
+               "DISobject.Entity State" : "Gun"
+            },
+            {
+               "VariableParameters" : [
+                  {
+                     "VariableParameters" : "Parts"
                   }
                ]
             }
@@ -831,5 +851,5 @@
       "Standard" : "DIS V5",
       "SystemVariables" : null
    },
-   "Version" : "3.0.217.Last_V1.5-187-gc0dd096e-dev"
+   "Version" : "3.0.221.Last_V1.5-191-g8c4bceee-dev"
 }
