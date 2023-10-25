@@ -6,7 +6,7 @@ function convertUnrealPositionToHLA (value)
 
 -- Since we are working over a fairly small part of the planet, we can assume a flat surface
 --convert lat/long to geocentric
-enuX, enuY, enuZ = EnuToEcef( value['WorldLocation.Y']:toDouble()/100,  value['WorldLocation.X']:toDouble()/100, value['WorldLocation.Z']:toDouble()/100, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+enuX, enuY, enuZ = EnuToEcef( value['WorldLocation.Y']:toDouble()*100,  value['WorldLocation.X']:toDouble()*100, value['WorldLocation.Z']:toDouble()*100, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 value['WorldLocation.X']:set(enuX)
 value['WorldLocation.Y']:set(enuY)
