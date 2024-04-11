@@ -3,23 +3,27 @@
    "DISConfig" : {
       "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 3001,
-      "DISDestinationAddress" : "127.0.0.1",
+      "DISDestinationAddress" : "192.168.2.255",
       "DISDisVer" : 5,
       "DISEnableExpertMode" : true,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "127.0.0.1",
+      "DISNIA" : "192.168.2.68",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
+      "DISTimeStampFormat" : 0,
       "DISUseAsyncIO" : false,
+      "DropOutofSequencePacketAbsolute" : false,
+      "DropOutofSequencePacketEntity" : false,
       "EntityStatePDUUpdateFrequency" : 1,
       "KeepAliveTimeout" : 20,
       "SendCompleteEntityStatePDUPeriodically" : true,
       "UseESUForKeepAlive" : true
    },
    "Federate" : {
+      "AutoAchieveSyncPoints" : false,
       "CallbackReportingLevel" : 1,
       "CallbacksToLog" : false,
       "CreateFederationExecution" : true,
@@ -31,7 +35,7 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "C:\\code\\ds.tools_git\\Github Public Samples\\coreUnrealFirstPersonShooterDemo_UE500+\\Plugins\\Binaries\\Win64\\\\DIS_V5_IEEE_1278.1-1995_expert.xml"
+         "C:\\code\\ds.tools_git\\coreDSUnreal\\Samples\\coreDSUnreal_Sample_FirstPersonShooterDemo\\Plugins\\Marketplace\\coreDS\\Binaries\\Win64\\\\DIS_V5_IEEE_1278.1-1995_expert.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",
@@ -843,7 +847,7 @@
    ],
    "RTIConfiguration" : {
       "Compiler" : "DLC",
-      "DLLName" : "DLC_DIS-V5.dll",
+      "DLLName" : "DLC_DIS-V5",
       "LocalDesignatorsExtra" : "",
       "Manufacturer" : "",
       "OverEncDecFOM" : "",
@@ -851,5 +855,5 @@
       "Standard" : "DIS V5",
       "SystemVariables" : null
    },
-   "Version" : "3.0.221.Last_V1.5-191-g8c4bceee-dev"
+   "Version" : "3.0.351-dev"
 }

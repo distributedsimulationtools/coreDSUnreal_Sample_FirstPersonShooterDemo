@@ -4,7 +4,7 @@
       "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 3001,
       "DISDestinationAddress" : "0.0.0.255",
-      "DISDisVer" : 5,
+      "DISDisVer" : 7,
       "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
@@ -13,7 +13,10 @@
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
+      "DISTimeStampFormat" : 0,
       "DISUseAsyncIO" : false,
+      "DropOutofSequencePacketAbsolute" : false,
+      "DropOutofSequencePacketEntity" : false,
       "EntityStatePDUUpdateFrequency" : 5,
       "KeepAliveTimeout" : 5,
       "SendCompleteEntityStatePDUPeriodically" : false,
@@ -31,10 +34,10 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "C:\\code\\ds.tools_git\\Github Public Samples\\coreUnrealFirstPersonShooterDemo_UE500+\\Config\\RPR_v2.0.xml"
+         "C:\\code\\ds.tools_git\\coreDSUnreal\\Samples\\coreDSUnreal_Sample_FirstPersonShooterDemo\\Content\\coreDS\\RPR_v2.0.xml"
       ],
-      "FederateName" : "Unreal_Player1",
-      "FederateType" : "Unreal_Player1",
+      "FederateName" : "Unreal_Player2",
+      "FederateType" : "Unreal_Player2",
       "FederationName" : "Unreal",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
       "InteractionPublishList" : [
@@ -613,14 +616,23 @@
       }
    ],
    "RTIConfiguration" : {
-      "Compiler" : "VC141",
-      "DLLName" : "DLC_1516e_VC141_x64.dll",
+      "Compiler" : "VC142",
+      "DLLName" : "Mak_1516e_VC142_x64.dll",
       "LocalDesignatorsExtra" : "",
-      "Manufacturer" : "DLC",
+      "Manufacturer" : "Mak",
       "OverEncDecFOM" : "",
-      "RTILibPath" : "C:/MAK/makRti4.6/bin",
+      "RTILibPath" : "",
       "Standard" : "1516e",
-      "SystemVariables" : null
+      "SystemVariables" : {
+         "PATH" : {
+            "Append" : 0,
+            "Value" : "C:/MAK/makRti4.6/bin;C:/MAK/makRti4.6/bin/gui"
+         },
+         "RTI_RID_FILE" : {
+            "Append" : 0,
+            "Value" : "C:/MAK/makRti4.6/rid.mtl"
+         }
+      }
    },
-   "Version" : "3.0.221.Last_V1.5-191-g8c4bceee-dev"
+   "Version" : "3.0.337-dev"
 }
