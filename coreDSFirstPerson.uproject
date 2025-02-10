@@ -7,6 +7,14 @@
 		{
 			"Name": "coreDSModule",
 			"Enabled": true
+		},
+		{
+			"Name": "coreDSGeoReferencingSystemSupport",
+			"Enabled": false
+		},
+		{
+			"Name": "coreDSCesiumSupport",
+			"Enabled": false
 		}
 	]
 }

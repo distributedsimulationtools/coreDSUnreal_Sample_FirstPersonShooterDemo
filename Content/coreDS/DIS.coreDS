@@ -35,7 +35,7 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "C:\\code\\ds.tools_git\\coreDSUnreal\\Samples\\coreDSUnreal_Sample_FirstPersonShooterDemo\\Plugins\\Marketplace\\coreDS\\Binaries\\Win64\\\\DIS_V5_IEEE_1278.1-1995_expert.xml"
+         "DIS_V5_IEEE_1278.1-1995_expert.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",

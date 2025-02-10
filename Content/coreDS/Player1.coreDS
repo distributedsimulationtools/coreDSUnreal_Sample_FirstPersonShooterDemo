@@ -3,7 +3,7 @@
    "DISConfig" : {
       "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 3001,
-      "DISDestinationAddress" : "0.0.0.255",
+      "DISDestinationAddress" : "0.0.0.0",
       "DISDisVer" : 7,
       "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
@@ -23,6 +23,7 @@
       "UseESUForKeepAlive" : false
    },
    "Federate" : {
+      "AutoAchieveSyncPoints" : false,
       "CallbackReportingLevel" : 1,
       "CallbacksToLog" : false,
       "CreateFederationExecution" : true,
@@ -34,7 +35,7 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "C:\\code\\ds.tools_git\\coreDSUnreal\\Samples\\coreDSUnreal_Sample_FirstPersonShooterDemo\\Content\\coreDS\\RPR_v2.0.xml"
+         "RPR_v2.0.xml"
       ],
       "FederateName" : "Unreal_Player1",
       "FederateType" : "Unreal_Player1",
@@ -82,7 +83,7 @@
       ],
       "LogToFile" : {
          "Destination" : "",
-         "Enabled" : 0,
+         "Enabled" : false,
          "Filter" : "%Severity% >= error",
          "MaxVerbose" : "%Severity% >= error"
       },
@@ -617,22 +618,13 @@
    ],
    "RTIConfiguration" : {
       "Compiler" : "VC142",
-      "DLLName" : "Mak_1516e_VC142_x64.dll",
+      "DLLName" : "Mak_1516e_VC142_x64",
       "LocalDesignatorsExtra" : "",
       "Manufacturer" : "Mak",
       "OverEncDecFOM" : "",
       "RTILibPath" : "",
       "Standard" : "1516e",
-      "SystemVariables" : {
-         "PATH" : {
-            "Append" : 0,
-            "Value" : "C:/MAK/makRti4.6/bin;C:/MAK/makRti4.6/bin/gui"
-         },
-         "RTI_RID_FILE" : {
-            "Append" : 0,
-            "Value" : "C:/MAK/makRti4.6/rid.mtl"
-         }
-      }
+      "SystemVariables" : null
    },
-   "Version" : "3.0.337-dev"
+   "Version" : "3.0.512-dev"
 }

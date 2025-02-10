@@ -1,3 +1,4 @@
+require("ecef2lla")
 require("ReferenceLatLongAlt")
 
 function convertUnrealPositionToHLAForInteraction (value)
