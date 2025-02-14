@@ -16,5 +16,8 @@
 			"Name": "coreDSCesiumSupport",
 			"Enabled": false
 		}
+	],
+	"TargetPlatforms": [
+		"Windows"
 	]
 }
