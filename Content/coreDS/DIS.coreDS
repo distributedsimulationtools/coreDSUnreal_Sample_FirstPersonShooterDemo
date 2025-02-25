@@ -7,9 +7,9 @@
       "DISDisVer" : 5,
       "DISEnableExpertMode" : true,
       "DISExerciseID" : 1,
-      "DISJoinMulticastGroup" : false,
-      "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "192.168.2.68",
+      "DISJoinMulticastGroup" : true,
+      "DISMulticastAddress" : "239.0.0.1",
+      "DISNIA" : "192.168.2.40",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
@@ -75,7 +75,7 @@
       ],
       "LogToFile" : {
          "Destination" : "",
-         "Enabled" : 0,
+         "Enabled" : false,
          "Filter" : "%Severity% >= error",
          "MaxVerbose" : "%Severity% >= error"
       },
@@ -855,5 +855,5 @@
       "Standard" : "DIS V5",
       "SystemVariables" : null
    },
-   "Version" : "3.0.351-dev"
+   "Version" : "3.0.512-dev"
 }
