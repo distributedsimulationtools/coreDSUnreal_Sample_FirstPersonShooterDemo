@@ -5,7 +5,7 @@ This is a Sample project to be used with `coreDS
 Unreal <https://www.ds.tools/products/hla-dis-unreal-engine-4/>`__ and
 the `Unreal Engine 5 <https://www.unrealengine.com>`__. You can request a free trial at https://www.ds.tools/contact-us/trial-request/
 
-This sample is compatible with the Unreal Engine 5+. A version compatible with UE4.24+ can be found in a different branch.
+This sample is compatible with the Unreal Engine 5.2+.
 
 coreDS Unreal must already be installed and activated to use this project. Please make sure the coreDS Unreal plugin is enabled.
 
