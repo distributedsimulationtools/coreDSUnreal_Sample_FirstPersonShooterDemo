@@ -6,3 +6,6 @@ Config/.vs/
 coreDSFirstPerson.sln
 .vs/
 Plugins/
+packaged/
+Package/
+DerivedDataCache/
