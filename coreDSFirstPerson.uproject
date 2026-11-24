@@ -11,6 +11,10 @@
 		{
 			"Name": "coreDSCesiumSupport",
 			"Enabled": false
+		},
+		{
+			"Name": "coreDSModule",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
