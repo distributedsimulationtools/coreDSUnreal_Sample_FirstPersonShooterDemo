@@ -5,11 +5,11 @@ function startswith(text, prefix)
 end
 
 function FilterBullet (value)
-	-- if Platform of type Munition
-	
-	entitykind = __concatenateEntityType(value)
-	
+	-- Keeps the entity types starting with 2.1 (munitions), discards everything else
+
+	local entitykind = __concatenateEntityType(value)
+
 	if(startswith(entitykind, "2.1.") ~= true) then
-		return true
+		discardUpdate()
 	end
 end

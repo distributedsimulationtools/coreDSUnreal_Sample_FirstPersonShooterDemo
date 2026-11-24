@@ -5,11 +5,11 @@ function startswith(text, prefix)
 end
 
 function FilterGun (value)
-	-- if Plateform of type munition
-	
-	entitykind = __concatenateEntityType(value)
-		
+	-- Keeps the entity types starting with 3.1 (life forms), discards everything else
+
+	local entitykind = __concatenateEntityType(value)
+
 	if(startswith(entitykind, "3.1.") ~= true) then
-		return true
+		discardUpdate()
 	end
 end
