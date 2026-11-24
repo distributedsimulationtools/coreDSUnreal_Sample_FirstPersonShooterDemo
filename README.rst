@@ -1,93 +1,87 @@
-coreUnrealFirstPersonShooterDemo
-================================
+Blueprint (First Person Shooter) sample
+=======================================
 
-This is a Sample project to be used with `coreDS
-Unreal <https://www.ds.tools/products/hla-dis-unreal-engine-4/>`__ and
-the `Unreal Engine 5 <https://www.unrealengine.com>`__. You can request a free trial at https://www.ds.tools/contact-us/trial-request/
+This is a sample project to be used with `coreDS Unreal <https://www.ds.tools/products/hla-dis-unreal-engine-4/>`__ and `Unreal Engine <https://www.unrealengine.com>`__ 5.2 or later. You can request a free trial at https://www.ds.tools/contact-us/trial-request/
 
-This sample is compatible with the Unreal Engine 5.2+.
+coreDS Unreal must already be installed and activated to use this project. coreDS Unreal is not enabled by default: the sample's ``coreDSFirstPerson.uproject`` already enables it (``coreDSModule``). If you copy this setup to your own project, enable coreDS Unreal in Edit > Plugins, or list ``coreDSModule`` in your ``.uproject``.
 
-coreDS Unreal must already be installed and activated to use this project. Please make sure the coreDS Unreal plugin is enabled.
+This sample uses Blueprints only. The base project is the First Person template provided by Epic Games.
 
-The Sample project uses the following coreDS concepts: 
-   * Connect 
-   * Disconnect
-   * Send Update Object (send EntityStatePDU or UpdateAttributeValues, DiscoverObjectInstance)
-   * Send Message (send a MunitionDetonationPDU or SendInteraction)
-   * Receive Update Object (Receive EntityStatePDU or UpdateAttributeValues)
-   * Receive Message (Receive a MunitionDetonationPDU or SendInteraction)
-   * Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
+The sample project uses the following coreDS concepts:
 
-Runtime commands 
-   Pressing *K* will stop the connection and then open the configuration selection window. This allows to change from one distributed simulation protocol to the other without having to close the application.
+- Connect
+- Disconnect
+- Send Update Object (send EntityStatePDU, or RegisterObjectInstance and UpdateAttributeValues)
+- Send Message (send a FirePDU or a WeaponFire interaction)
+- Receive Update Object (receive EntityStatePDU, or DiscoverObjectInstance and ReflectAttributeValues)
+- Receive Message (receive a FirePDU or a WeaponFire interaction)
+- Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
+
+Runtime commands:
+
+- Pressing K stops the connection and opens the configuration selection window. This lets you switch from one distributed simulation protocol to the other without closing the application.
 
 Getting started
 ---------------
 
-The first step is to configure coreDS Unreal to know which objects, object attributes, messages and message parameters your simulator will support. Keep in mind that the names you define are not related to the distributed simulation protocol you plan on using. These names will only be used internally when using BluePrint or the Mapping interface.
+The first step is to tell coreDS Unreal which objects, object attributes, messages and message parameters your simulator supports. The names you define are not related to the distributed simulation protocol you plan to use. They are only used internally, from Blueprints or the mapping interface.
 
-You can find that configuration from 
-   Edit->Project Settings->coreDS Unreal
+This configuration is in Edit > Project Settings > Plugins > coreDS, in the Mapping category.
 
-In this particular case, we support sending/receiving a GUN object with Location and Orientation property and a BULLET object with a location. The demo also supports a GunFired message, with a Location property.
+In this sample, we send and receive a Gun object with a location and an orientation, and a Bullet object with a location. The sample also sends and receives a ShotFired message with a location. Received entities that are neither a Gun nor a Bullet are received as EverythingElse.
 
-The format for Object/Message names is NAME.PROPERTY. The Object/Message name is always the part before the first dot.
+The format of object and message names is NAME.PROPERTY. The object or message name is always the part before the first dot.
 
 .. image:: ./Doc/Images/pluginconfig.png
-   :alt: Plugin Configuration Screenshot
+   :alt: coreDS Mapping settings
 
-The next step is to configure an actual connection with a Distributed Simulation protocol. coreDS supports HLA (High-Level Architecture and DIS (Distributed Interaction Simulation).
+The next step is to configure an actual connection with a distributed simulation protocol. coreDS supports HLA (High-Level Architecture) and DIS (Distributed Interactive Simulation).
 
-You can open the configuration window either by running the game or selecting the proper menu option, as shown below:
+You can open the configuration window either by running the game or from Tools > Distributed Simulation > coreDS Unreal > Show coreDS UI.
 
-.. image:: ./Doc/Images/coreDSToolboxMenu.png
-   :alt: Plugin Configuration Screenshot
+This sample comes with 3 preconfigured configurations, in ``Content/coreDS``:
 
-This sample comes with 4 pre-configured settings: 
-   DIS_Player1: DIS v6
-   DIS_Player2: DIS v6
-   HLA_Player1: HLA 1516e with RPRFOM 2.0
-   HLA_Player2: HLA 1516e with RPRFOM 2.0
+- ``DIS.coreDS``: DIS v5
+- ``Player1.coreDS``: HLA 1516e with the RPR FOM 2.0
+- ``Player2.coreDS``: HLA 1516e with the RPR FOM 2.0
 
 .. image:: ./Doc/Images/ConfigurationSelection.png
-   :alt: Plugin ConfigurationSelection Screenshot
+   :alt: Configuration selection window
 
-Let’s take a look at each configuration.
+The FOM files are given by name only. The DIS configuration uses ``DIS_V5_IEEE_1278.1-1995_expert.xml``, shipped with coreDS Unreal in the plugin's ``ThirdParty/coreDS/bin`` folder (``coreDSModule/ThirdParty/coreDS/bin/VC143/x64/Release`` on Windows). The HLA configurations use the RPR FOM shipped with the sample, ``Content/coreDS/RPR_FOM_v2.0_1516-2010.xml``, next to the configurations.
+
+All the coreDS Unreal samples can run at the same time and see each other's entities. Their DIS configurations are DIS 5 on port 3000, exercise 1, listen on every network adapter (``0.0.0.0``) and broadcast to ``255.255.255.255``; each sample has its own Application Number (Automatic Mode 3010, Model Integration 3020 and 3021, First Person Shooter 3030, C++ 3040, Cesium 3050), since two simulators with the same Site and Application Numbers get their entities mixed up. Their HLA configurations join the ``coreDSUnreal`` federation with the RPR FOM 2.0 through the DLC (Dynamic Link Compatible) 1516e plugin, each with its own federate name.
+
+Let's take a look at each configuration.
 
 DIS
 ~~~
 
-For both configurations, it is important to configure the Configured Network Adapter. Click on the dropbox and select your active Network Adapter.
+Configure the network adapter: click the "Network Interface Address" drop-down list and select your active network adapter. Set the destination address for your network too.
 
 .. image:: ./Doc/Images/DISConnectionConfiguration.png
-   :alt: Plugin DISConnectionConfiguration Screenshot
+   :alt: DIS connection configuration
 
 Receiving
 ^^^^^^^^^
 
-Even if DIS does not explicitly support Subscription, coreDS supports incoming filtering. First, we must let coreDS know that we want to receive the EntityStatePDU and the FirePDU.
+Even if DIS does not explicitly support subscriptions, coreDS supports incoming filtering. First, we must let coreDS know that we want to receive the EntityStatePDU and the FirePDU.
 
 .. image:: ./Doc/Images/DIS_Receiver_PubSub.png
-   :alt: Plugin DIS_Receiver_PubSub Screenshot
+   :alt: DIS subscription
 
-Then comes the Mapping configuration. Since we are in a receiver, we care about the “Mapping In”
+Then comes the mapping configuration. To receive, we care about the "Mapping In".
 
-The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the “+” list. You can then link the Local Object/Message to a Protocol Object/Message by using the drop-down m next to the Object/Message name.
+The first step is to map a protocol object or message to a local object or message. The names you defined in the settings are listed in the drop-down list next to each protocol object or message: link Entity State to Gun, Bullet and EverythingElse, and Fire to ShotFired.
 
-.. image:: ./Doc/Images/DISMappingIn_ObjectMapping.png
-   :alt: Plugin DISMappingIn_ObjectMapping Screenshot
+Then you must map the local properties to the protocol properties. When receiving, we only map the values we are interested in: here, the location and the orientation.
 
-Then you must map the local properties to the protocol properties. Since we are in a receiving mode, we only care about the values we are interested in. In our case, we want to send back to Unreal the Location and the Orientation.
-
-.. image:: ./Doc/Images/DISMappingIn_WithChoice.png
-   :alt: Plugin DISMappingIn_WithChoice Screenshot
-
-Finally, we are receiving coordinates in Geocentric format, which Unreal doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep everything configurable at runtime, we use the coreDS-embedded Lua scripting engine to convert from Geocentric to flat coordinates centred around a given Lat/Long.
+Finally, we receive coordinates in geocentric format, which Unreal doesn't use. We could convert the coordinates in Unreal, but that would make it harder to switch to a different distributed simulation protocol. To keep everything configurable at runtime, we use the Lua scripting engine embedded in coreDS to convert from geocentric coordinates to flat coordinates centred on the reference latitude and longitude.
 
 .. image:: ./Doc/Images/DISMappingIn.png
-   :alt: Plugin DISMappingIn Screenshot
+   :alt: DIS Mapping In, conversion scripts
 
-Below is the script that converts from Geocentric to local coordinates. Scripts are located in /Content/coreDS/Scripts
+Below is ``convertPositionFromDISToUnreal.lua``, the "On Data Received" script of the location. It converts the location and the orientation. Unreal X is north and Y is east, and Unreal units are centimetres. Scripts are located in ``Content/coreDS/Script``.
 
 .. code-block:: lua
 
@@ -100,7 +94,7 @@ Below is the script that converts from Geocentric to local coordinates. Scripts 
       -- Since we are working over a fairly small part of the planet, we can assume a flat surface
       a, b, c = EcefToEnu(value['LocationInWorldCoordinates.X']:toFloat(), value['LocationInWorldCoordinates.Y']:toFloat(), value['LocationInWorldCoordinates.Z']:toFloat(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
-      --Convert geocentric to lat/long
+      --convert geocentric to lat/long
       lat, long, alt = ecef2lla(value['LocationInWorldCoordinates.X']:toFloat(), value['LocationInWorldCoordinates.Y']:toFloat(), value['LocationInWorldCoordinates.Z']:toFloat())
 
       lat = 0.0174532925 * lat  -- convert to radian
@@ -115,30 +109,29 @@ Below is the script that converts from Geocentric to local coordinates. Scripts 
       value['Orientation.Phi']:set(yaw)
 
       --scale back from meter to cm
-      value['LocationInWorldCoordinates.X']:set(b/100)
-      value['LocationInWorldCoordinates.Y']:set(a/100)
-      value['LocationInWorldCoordinates.Z']:set(c/100)
+      value['LocationInWorldCoordinates.X']:set(b*100)
+      value['LocationInWorldCoordinates.Y']:set(a*100)
+      value['LocationInWorldCoordinates.Z']:set(c*100)
 
    end
 
-You might have noticed that nowhere during the configuration process we used the Entity Kind to distinguish between a GUN and a BULLET. coreDS supports complex filtering by leveraging the LUA scripting engine. To filter the GUNs, we’ve created a simple script, FilterGun.lua, which will check the EntityKind property and instruct coreDS to discard the mapping if this is not the correct type.
+``EcefToEnu`` returns east, north and up, in metres: the script multiplies them by 100 and sets north as Unreal X and east as Unreal Y.
 
-.. image:: ./Doc/Images/DISMappingIn_Filter.png
-   :alt: Plugin DIS_MappingIn Filter Screenshot
+The configuration never uses the EntityType to tell a Gun from a Bullet. coreDS supports complex filtering with its Lua scripting engine. To filter the Guns, the "On Data Received" script of the EntityType group is ``FilterGun.lua``: it checks the EntityType and tells coreDS to discard the update when it is not a Gun (``3.1.``, a land life form). ``FilterBullet.lua`` keeps the ``2.1.`` munitions, and ``FilterAllExceptBulletAndGun.lua`` keeps everything else for EverythingElse.
 
 .. code-block:: lua
 
    require("__concatenateEntityType")
 
    function startswith(text, prefix)
-      return text:find(prefix, 1, true) == 1
+       return text:find(prefix, 1, true) == 1
    end
 
    function FilterGun (value)
       -- if Plateform of type munition
-      
+
       entitykind = __concatenateEntityType(value)
-         
+
       if(startswith(entitykind, "3.1.") ~= true) then
          return true
       end
@@ -147,59 +140,84 @@ You might have noticed that nowhere during the configuration process we used the
 Sending
 ^^^^^^^
 
-Then, we must let coreDS know that we want to send the EntityStatePDU and the FirePDU.
+Then, we must let coreDS know that we want to send the EntityStatePDU and the FirePDU. They are on the same Publication and Subscription tab as the received PDUs (see the screenshot above).
 
-.. image::  ./Doc/Images/DIS_Sender_PubSub.png
-   :alt: Plugin DIS_Sender_PubSub Screenshot
+Then comes the mapping configuration. To send, we care about the "Mapping Out".
 
-Then comes the Mapping configuration. Since we are in a Sender, we care about the “Mapping Out”
+The first step is to map a local object or message to a protocol object or message. The names you defined in the settings are listed in the "+" list. Link each local object or message to a protocol object or message with the drop-down list next to its name.
 
-The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the “+” list. You can then link the Local Object/Message to a Protocol Object/Message by using the dropbox next to the Object/Message name.
+Then you must map the local properties to the protocol properties. When sending, you must fill the complete structure. Static values can be set at this point. Map Location and Orientation to the local properties.
 
-Then you must map the local properties to the protocol properties. Since we are in a Sender mode, we must fill the complete structure. Static values can be set at this point. We will map Location and Orientation to local properties.
-
-Finally, we are sending coordinations in local format, which DIS doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To allow configuration at runtime, we use the coreDS embedded Lua scripting engine to convert from flat coordinates, centred around a given Lat/Long, to Geocentric.
+Finally, we send coordinates in local format, which DIS doesn't use. To keep everything configurable at runtime, we use the Lua scripting engine embedded in coreDS to convert from flat coordinates, centred on the reference latitude and longitude, to geocentric coordinates.
 
 .. image:: ./Doc/Images/DISMappingOut.png
-   :alt: Plugin DISMappingOut Screenshot
+   :alt: DIS Mapping Out
 
-As for outgoing values, you must set a conversion script to convert from the local coordinates to geocentric coordinates. Scripts are located in /Content/coreDS/Scripts.
+The "On Data Updated" script of the location is ``convertUnrealPositionToDIS.lua``, and the one of the orientation is ``convertOrientationFromUnrealToDIS.lua``. The location script divides the Unreal centimetres by 100 and passes east (Unreal Y) and north (Unreal X) to ``EnuToEcef``:
+
+.. code-block:: lua
+
+   require("ReferenceLatLongAlt")
+
+   lastPositionX = 0
+   lastPositionY = 0
+   lastPositionZ = 0
+
+   function convertUnrealPositionToDIS(value)
+
+      lastPositionX = value['X']:toFloat();
+      lastPositionY = value['Y']:toFloat();
+      lastPositionZ = value['Z']:toFloat();
+
+      -- Since we are working over a fairly small part of the planet, we can assume a flat surface
+      --convert lat/long to geocentric
+      a, b, c = EnuToEcef(lastPositionY/100, lastPositionX/100, lastPositionZ/100, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+
+      value['X']:set(a)
+      value['Y']:set(b)
+      value['Z']:set(c)
+
+      lastPositionX = a
+      lastPositionY = b
+      lastPositionZ = c
+
+   end
 
 HLA
 ~~~
 
-For both configurations, it is important to have a valid FOM File. The sample provides a RPRFOM 2.0 compliant FOM file, located in /Config. Although this sample is configured to use an RPRFOM-based FOM file, you can load the FOM file of your choice.
+For both configurations, you need a valid FOM file. The sample provides an RPR FOM 2.0 compliant FOM file, ``Content/coreDS/RPR_FOM_v2.0_1516-2010.xml``. Although this sample is configured for the RPR FOM, you can load the FOM file of your choice.
 
 .. image:: Doc/Images/HLAConnectionConfiguration.png
-   :alt: Plugin HLAConnectionConfiguration Screenshot
+   :alt: HLA federate parameters
 
-coreDS supports a wide range of RTIs, from the legacy DMSO RTI (HLA 1.3) to HLA 1516e compliant RTI like the Pitch RTI or MAK RTI. The complete list of supported RTI can be found here https://www.ds.tools/products/coreds/detailed-features-list/
+coreDS supports a wide range of RTIs, from the legacy DMSO RTI (HLA 1.3) to HLA 1516e compliant RTIs like the Pitch RTI or the MAK RTI. The complete list of supported RTIs can be found at https://www.ds.tools/products/coreds/detailed-features-list/
 
-If you are using the default configuration, you must select an Evolved-compliant RTI.
+If you are using the default configuration, you must select an HLA Evolved (1516e) compliant RTI.
 
 .. image:: Doc/Images/HLAConnectionRTISettings.png
-   :alt: Plugin HLAConnectionRTISettings Screenshot
+   :alt: HLA RTI settings
 
 Receiving
 ^^^^^^^^^
 
-First, we must let coreDS know that we want to receive the Statial attribute from a LifeForm and the WeaponFire interaction.
+First, we must let coreDS know that we want to receive the Spatial attribute of HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform and HLAobjectRoot.BaseEntity.PhysicalEntity.Munition, and the WeaponFire interaction.
 
 .. image:: ./Doc/Images/HLA_Receiver_PubSub.png
-   :alt: Plugin HLA_Receiver_PubSub Screenshot
+   :alt: HLA publication and subscription
 
-Then comes the Mapping configuration. Since we are in a receiver, we care about the “Mapping In”
+Then comes the mapping configuration. To receive, we care about the "Mapping In".
 
-The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the “+” list. You can then link the Local Object/Message to a Protocol Object/Message by using the dropbox next to the Object/Message name.
+The first step is to map a protocol object or message to a local object or message: Lifeform to Gun, Munition to Bullet, PhysicalEntity to EverythingElse and WeaponFire to ShotFired.
 
-Then you must map the local properties to the protocol properties. Since we are in a receiving mode, we only care about the values we are interested in. In our case, we want to send back to Unreal the Location and the Orientation from the Spatial attribute.
+Then you must map the local properties to the protocol properties. When receiving, we only map the values we are interested in: here, the location and the orientation of the Spatial attribute.
 
-Finally, we are receiving coordinates in Geocentric format, which Unreal doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep all the editable at runtime, we use the coreDS-embedded Lua scripting engine to convert from Geocentric to flat coordinates centred around a given Lat/Long.
+Finally, we receive coordinates in geocentric format, which Unreal doesn't use. To keep everything configurable at runtime, we use the Lua scripting engine embedded in coreDS to convert from geocentric coordinates to flat coordinates centred on the reference latitude and longitude.
 
-.. image:: ./Doc/Images/HLAMappingIn_ObjectMapping.png
-   :alt: Plugin HLAMappingIn_ObjectMapping Screenshot
+.. image:: ./Doc/Images/HLAMappingIn.png
+   :alt: HLA Mapping In
 
-Below is the script that converts from Geocentric to local coordinates. Scripts are located in /Content/coreDS/Scripts
+Below is ``convertPositionFromHLAToUnreal.lua``, the "On Data Received" script of the Spatial attribute. The WeaponFire location uses ``convertPositionFromHLAToUnrealForInteraction.lua``, which applies the same location conversion. Scripts are located in ``Content/coreDS/Script``.
 
 .. code-block:: lua
 
@@ -211,7 +229,7 @@ Below is the script that converts from Geocentric to local coordinates. Scripts 
       -- Since we are working over a fairly small part of the planet, we can assume a flat surface
       a, b, c = EcefToEnu(value['WorldLocation.X']:toFloat(), value['WorldLocation.Y']:toFloat(), value['WorldLocation.Z']:toFloat(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
-      --Convert geocentric to lat/long
+      --convert geocentric to lat/long
       lat, long, alt = ecef2lla(value['WorldLocation.X']:toFloat(), value['WorldLocation.Y']:toFloat(), value['WorldLocation.Z']:toFloat())
 
       lat = 0.0174532925 * lat  -- convert to radian
@@ -226,143 +244,146 @@ Below is the script that converts from Geocentric to local coordinates. Scripts 
       value['Orientation.Phi']:set(yaw)
 
       --scale back from meter to cm
-      value['WorldLocation.X']:set(b/100)
-      value['WorldLocation.Y']:set(a/100)
-      value['WorldLocation.Z']:set(c/100)
+      value['WorldLocation.X']:set(b*100)
+      value['WorldLocation.Y']:set(a*100)
+      value['WorldLocation.Z']:set(c*100)
 
    end
 
 Sending
 ^^^^^^^
 
-First, we must let coreDS know that we want to send the Statial attribute from a LifeForm and the WeaponFire interaction.
+First, we must let coreDS know that we want to send the Spatial attribute of the same object classes and the WeaponFire interaction (see the publication and subscription screenshot above).
 
-.. image:: ./Doc/Images/DIS_Sender_PubSub.png
-   :alt: Plugin DIS_Sender_PubSub Screenshot
+Then comes the mapping configuration. To send, we care about the "Mapping Out": Gun to Lifeform, Bullet to Munition and ShotFired to WeaponFire.
 
-Then comes the Mapping configuration. Since we are in a Sender, we care about the “Mapping Out”
+Then you must map the local properties to the protocol properties. When sending, you must fill the complete structure. Static values can be set at this point. Map the location and the orientation of the Spatial attribute to the local properties.
 
-The first step is to Map a Local Object/Message to a Protocol Object/Message. As you see, the Names you defined during the Plugin configuration are listed in the “+” list. You can then link the Local Object/Message to a Protocol Object/Message by using the dropbox next to the Object/Message name.
-
-Then you must map the local properties to the protocol properties. Since we are in a Sender mode, we must fill the complete structure. Static values can be set at this point. We will map Location and Orientation to local properties.
-
-Finally, we are sending coordinations in local format, which is not compliant with the RPRFOM Spatial attribute format. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep all the configurations editable at runtime, we use the embedded Lua scripting engine to convert from flat coordinates, centered around a given Lat/Long, to Geocentric.
+Finally, we send coordinates in local format, which the RPR FOM Spatial attribute does not use. To keep everything configurable at runtime, we use the embedded Lua scripting engine to convert from flat coordinates, centred on the reference latitude and longitude, to geocentric coordinates.
 
 .. image:: ./Doc/Images/HLAMappingOut.png
-   :alt: Plugin HLAMappingOut Screenshot
+   :alt: HLA Mapping Out
 
-As for outgoing values, you must set a conversion script to convert from the local coordinates to geocentric coordinates. Scripts are located in /Content/coreDS/Scripts.
+The "On Data Updated" script of the Spatial attribute is ``convertUnrealPositionToHLA.lua``, which converts the location and the orientation, and the one of the WeaponFire location is ``convertUnrealPositionToHLAForInteraction.lua``. As for DIS, they divide the Unreal centimetres by 100 and pass east (Unreal Y) and north (Unreal X) to ``EnuToEcef``. Scripts are located in ``Content/coreDS/Script``.
+
+Blueprint functions
+-------------------
+
+The coreDS Unreal Blueprint functions (Connect, Disconnect, Update Object, Send Message, Delete Object and the Register … Handler functions) belong to the coreDS Engine, a game instance subsystem. In a Blueprint, get it with the "coreDS Engine" (Get Game Instance Subsystem) node and connect it to the function's Target pin. Object and message values are passed as a coreDS variant.
+
+The Blueprint screenshots below come from an earlier version of the sample: they do not show the Target pin and use arrays of name/value pairs. The sample's Blueprints use the current functions.
 
 Connect
 -------
 
-At some point, you must instruct your simulator to connect to the Distributed Simulation system (either HLA or DIS). When using DIS, a UDP socket will be created. When using HLA, a connection to the RTI will be attempted. If supported by the HLA version you are using, a call to connect() will be made, followed by a call to createFederationExecution (this call will be disabled from the HLA configuration) and joinFederationExecution. Once we have joined the Federation, we then set the various required states like time management, publish/subscribe, etc.
+At some point, your simulator must connect to the distributed simulation (HLA or DIS). With DIS, a UDP socket is created. With HLA, a connection to the RTI is attempted: if supported by the HLA version you are using, connect() is called, followed by createFederationExecution (this call can be disabled in the HLA configuration) and joinFederationExecution. Once the federation is joined, the required states, such as time management and publication and subscription, are set.
 
-From the Level Blueprint:
+In this sample, "Connect On Start" is off in the Runtime category of the coreDS settings, and the Level Blueprint connects on BeginPlay:
 
 .. image:: ./Doc/Images/BlueprintConnect.png
-   :alt: Blueprint_Connect Screenshot
+   :alt: Blueprint Connect
 
 Disconnect
 ----------
 
-When disconnecting, a DIS configuration will close the socket. HLA will call resignFederationExecution and destroyFederationExecution.
+When disconnecting, a DIS configuration closes the socket. HLA calls resignFederationExecution and destroyFederationExecution.
 
 From the Level Blueprint:
 
 .. image:: ./Doc/Images/BluePrintDisconnect.png
-   :alt: Blueprint_Disconnect Screenshot
+   :alt: Blueprint Disconnect
 
-Send Update Object (send EntityStatePDU or UpdateAttributeValues, DiscoverObjectInstance)
------------------------------------------------------------------------------------------
+Send Update Object (send EntityStatePDU or UpdateAttributeValues)
+-----------------------------------------------------------------
 
-Sending an Object Update is fairly simple. You first have to build an array of <Name, Value> pairs then use the SendUpdateObject block. All names must match the names configured in the coreDS Unreal plugin.
+To send an object update, build the values, then call Update Object with a unique object name, the object type and the values. All names must match the names configured in the coreDS Unreal settings.
 
-When using HLA, if this is the first call using that object type, registerObjectInstance will be called, followed by UpdateObjectAttributeValues.
+With HLA, the first call for an object registers it (registerObjectInstance), and each call sends updateAttributeValues.
 
-When using DIS, an EntityStatePDU will be sent.
+With DIS, an EntityStatePDU is sent.
 
 .. image:: ./Doc/Images/BluePrintSendObject.png
-   :alt: Blueprint_BluePrintSendObject Screenshot
+   :alt: Blueprint Update Object
 
-Send Message (send a MunitionDetonationPDU or SendInteraction)
---------------------------------------------------------------
+Send Message (send a FirePDU or a WeaponFire interaction)
+---------------------------------------------------------
 
-Sending a message is fairly simple. You first have to build an array of <Name, Value> pairs then use the SendMessage block. All names must match the names configured in the coreDS Unreal plugin.
+Sending a message works the same way: build the values, then call Send Message. All names must match the names configured in the coreDS Unreal settings.
 
-When using HLA, a call to SendInteraction will be made.
+With HLA, a WeaponFire interaction is sent.
 
-When using DIS, a FirePDU will be sent.
+With DIS, a FirePDU is sent.
 
 .. image:: ./Doc/Images/BluePrintSendMessage.png
-   :alt: Blueprint_BluePrintSendMessage Screenshot
+   :alt: Blueprint Send Message
 
-Receive Update Object (Receive EntityStatePDU or UpdateAttributeValues)
------------------------------------------------------------------------
+Receive Update Object (receive EntityStatePDU or ReflectAttributeValues)
+------------------------------------------------------------------------
 
-If you want to receive Object updates, you must first register an ObjectUpdateHandler. The registration must be done using the object name used in the coreDS Unreal plugin configuration:
+To receive object updates, register an object update handler for an object name of the coreDS Unreal settings:
 
 .. image:: ./Doc/Images/BluePrintRegisterObjectUpdateHandler.png
-   :alt: Blueprint_RegisteringObjectUpdateHandler Screenshot
+   :alt: Blueprint Register Object Update Handler
 
-Then, each time an object of the register type is received, the GunMoved event will be triggered.
+Then, each time a Gun is received, the GunMoved event is triggered.
 
-In this particular case, we also added some logic to keep a list of discovered objects in Unreal. We first look into a map if the discovered object name already exists on the map. If not, a new Actor is spawned, else the Actor instance is updated. That part will most likely need to be updated based on your particular requirements.
+The sample also keeps a map of the discovered objects. If the object name is not in the map yet, a new actor is spawned; otherwise, the existing actor is updated. You will most likely need to adapt that part to your requirements.
 
 .. image:: ./Doc/Images/BluePrintDiscoverObjectInstance.png
-   :alt: Blueprint_DiscoverObjectInstance Screenshot
+   :alt: Blueprint discovered objects
 
-Below is a screenshot showing how to parse received information. As you will notice, the Property names are the same then the ones configurated in the “Getting started” part.
+Below is how to read the received values. The property names are the ones configured in `Getting started`_.
 
 .. image:: ./Doc/Images/BluePrintReceiveObject.png
-   :alt: Blueprint_ReceiveObject Screenshot
+   :alt: Blueprint reading received values
 
-Receive Message (Receive a MunitionDetonationPDU or SendInteraction)
---------------------------------------------------------------------
+Receive Message (receive a FirePDU or a WeaponFire interaction)
+---------------------------------------------------------------
 
-If you want to receive a message, you must first register a MessageReceivedHandler:
-
-Then, each time a message of the register type is received, the DetonationReceived event will be triggered.
+To receive a message, register a message received handler. Then, each time a ShotFired message is received, the handler's event is triggered: here, it spawns a projectile and plays the firing sound.
 
 .. image:: ./Doc/Images/BluePrintReceiveInteraction.png
-   :alt: Blueprint_ReceiveInteraction Screenshot
+   :alt: Blueprint Register Message Received Handler
 
 Delete Objects (deleteObjectInstance)
 -------------------------------------
 
-If you are using DIS, at some point, you have to let coreDS know that a given object is no longer active; otherwise, coreDS will continue to send the keep-alive packet. For HLA users, the concept is more straightforward since you have to actively delete the Object from the federation.
+With DIS, you must tell coreDS when an object is no longer active; otherwise, coreDS keeps sending its keep-alive updates. With HLA, the object must be deleted from the federation.
 
 .. image:: ./Doc/Images/BluePrintDeleteObject.png
-   :alt: Blueprint_DeleteObject Screenshot
+   :alt: Blueprint Delete Object
 
 Detect Deleted Objects (EntityStatePDU timeout or RemoveObjectInstance)
 -----------------------------------------------------------------------
 
-At this point, you most likely understood how coreDS Unreal works! Let’s add a handler when objects are removed from the Distributed Simulation system. When using DIS, this happens when the EntityStatePDU is not updated for the last 5 seconds (or the configuration value in DIS 7). With HLA, the handler is called when a removeObjectInstance callback is received.
+Let's add a handler for objects removed from the distributed simulation. With DIS, this happens when the EntityStatePDU of an object has not been received for 5 seconds (or the configured value in DIS 7). With HLA, the handler is called when a removeObjectInstance callback is received.
 
 .. image:: ./Doc/Images/BlueprintRemoveObject.png
-   :alt: Blueprint_BlueprintRemoveObject Screenshot
+   :alt: Blueprint Register Object Removed Handler
 
-#Blueprint locations Everything related to receiving objects and messages(interactions) is located in the Level Blueprint.
+Blueprint locations
+-------------------
 
-Logic related to sending the GUN location is within the FirstPersonCaracter Blueprint.
+Everything related to receiving objects and messages is in the Level Blueprint.
 
-Logic related to sending the FIRE message and updating the BULLET position is located in the FirstPersonProjectile Blueprint.
+Sending the Gun location and the ShotFired message is in the FirstPersonCharacter Blueprint.
 
-Overwriting to ErrorMessage handler
------------------------------------
+Sending the Bullet location is in the FirstPersonProjectile Blueprint.
 
-This block allows us to overwrite the default behavior of displaying the errors in the upper left side of the screen. In some cases, you might want to handle errors in a different UI.
+Overriding the error message handler
+------------------------------------
 
-.. image:: ./Doc/Images/BluePrintRegisterErrorMessageHandler.PNG
-   :alt: BluePrintRegisterErrorMessageHandler Screenshot
+By default, errors are displayed in the upper left corner of the screen. Register an error handler to show them in a different UI.
+
+.. image:: ./Doc/Images/BluePrintRegisterErrorMessageHandler.png
+   :alt: Blueprint Register Error Received Handler
 
 Setting your origin
 -------------------
 
-The Unreal coordinate system, basically a rectangle, needs to be converted to be sent to DIS and HLA (RPR-FOM). To do that, coreDS Unreal provides an easy mechanism.
+The Unreal world is flat, so its coordinates must be converted for DIS and HLA (RPR FOM). The conversion is centred on a reference location.
 
-To set your project origin coordinates (lat/lon), go to “Project Settings”, then “coreDS”:
+To set it, go to Edit > Project Settings > Plugins > coreDS and set "Reference Latitude", "Reference Longitude" and "Reference Altitude" in the Scene category.
 
 .. image:: Doc/Images/ConfigurationSceneLatLon.png
-   :alt: ConfigurationSceneLatLon Screenshot
+   :alt: Scene settings
