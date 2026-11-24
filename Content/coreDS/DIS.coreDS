@@ -2,14 +2,14 @@
    "ConfigType" : 1,
    "DISConfig" : {
       "AutomaticEntityStateUpdateManagement" : true,
-      "DISAppNumber" : 3001,
-      "DISDestinationAddress" : "192.168.2.255",
+      "DISAppNumber" : 3030,
+      "DISDestinationAddress" : "255.255.255.255",
       "DISDisVer" : 5,
       "DISEnableExpertMode" : true,
       "DISExerciseID" : 1,
-      "DISJoinMulticastGroup" : true,
+      "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "239.0.0.1",
-      "DISNIA" : "192.168.2.40",
+      "DISNIA" : "0.0.0.0",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
@@ -855,5 +855,5 @@
       "Standard" : "DIS V5",
       "SystemVariables" : null
    },
-   "Version" : "3.0.512-dev"
+   "Version" : "3.0.572-dev"
 }

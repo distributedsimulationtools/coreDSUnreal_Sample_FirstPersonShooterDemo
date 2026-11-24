@@ -2,9 +2,9 @@
    "ConfigType" : 0,
    "DISConfig" : {
       "AutomaticEntityStateUpdateManagement" : true,
-      "DISAppNumber" : 3001,
+      "DISAppNumber" : 3030,
       "DISDestinationAddress" : "0.0.0.0",
-      "DISDisVer" : 7,
+      "DISDisVer" : 5,
       "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
@@ -35,11 +35,11 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "RPR_v2.0.xml"
+         "RPR_FOM_v2.0_1516-2010.xml"
       ],
-      "FederateName" : "Unreal_Player2",
-      "FederateType" : "Unreal_Player2",
-      "FederationName" : "Unreal",
+      "FederateName" : "FPS_Player2",
+      "FederateType" : "Player",
+      "FederationName" : "coreDSUnreal",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
       "InteractionPublishList" : [
          {
@@ -618,9 +618,9 @@
    ],
    "RTIConfiguration" : {
       "Compiler" : "VC142",
-      "DLLName" : "Mak_1516e_VC142_x64",
+      "DLLName" : "DLC_1516e_VC142_x64",
       "LocalDesignatorsExtra" : "",
-      "Manufacturer" : "Mak",
+      "Manufacturer" : "DLC",
       "OverEncDecFOM" : "",
       "RTILibPath" : "",
       "Standard" : "1516e",
