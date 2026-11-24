@@ -5,10 +5,10 @@ require("ecef2lla")
 function convertPositionFromDISToUnreal(value)
 
 	-- Since we are working over a fairly small part of the planet, we can assume a flat surface
-	a, b, c = EcefToEnu(value['LocationInWorldCoordinates.X']:toFloat(), value['LocationInWorldCoordinates.Y']:toFloat(), value['LocationInWorldCoordinates.Z']:toFloat(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+	a, b, c = EcefToEnu(value['LocationInWorldCoordinates.X']:toDouble(), value['LocationInWorldCoordinates.Y']:toDouble(), value['LocationInWorldCoordinates.Z']:toDouble(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 	--convert geocentric to lat/long
-	lat, long, alt = ecef2lla(value['LocationInWorldCoordinates.X']:toFloat(), value['LocationInWorldCoordinates.Y']:toFloat(), value['LocationInWorldCoordinates.Z']:toFloat())
+	lat, long, alt = ecef2lla(value['LocationInWorldCoordinates.X']:toDouble(), value['LocationInWorldCoordinates.Y']:toDouble(), value['LocationInWorldCoordinates.Z']:toDouble())
 
 	lat = 0.0174532925 * lat  -- convert to radian
 	long = 0.0174532925 * long  -- convert to radian
@@ -22,8 +22,8 @@ function convertPositionFromDISToUnreal(value)
 	value['Orientation.Phi']:set(yaw)
 
 	--scale back from meter to cm
-	value['LocationInWorldCoordinates.X']:set(b/100)
-	value['LocationInWorldCoordinates.Y']:set(a/100)
-	value['LocationInWorldCoordinates.Z']:set(c/100)
+	value['LocationInWorldCoordinates.X']:set(b*100)
+	value['LocationInWorldCoordinates.Y']:set(a*100)
+	value['LocationInWorldCoordinates.Z']:set(c*100)
 
-end
+end
